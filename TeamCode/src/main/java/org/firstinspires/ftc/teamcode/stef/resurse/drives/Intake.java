@@ -33,8 +33,8 @@ public class Intake {
 
         if (einchis) {
 //            intake.setPosition(Ceva.servoToDegrees(300));
-            intake1.setPosition(0.3);
-            intake2.setPosition(0.7);
+            intake1.setPosition(0.15);
+            intake2.setPosition(0.85);
         }else {
 
 //            intake.setPosition(Ceva.servoToDegrees(250));
@@ -47,7 +47,7 @@ public class Intake {
             rotire.setPosition(0);
         }else {
 //            rotire.setPosition(Ceva.servoToDegrees(0));
-            rotire.setPosition(0.6);
+            rotire.setPosition(0.68);
         }
 
 
