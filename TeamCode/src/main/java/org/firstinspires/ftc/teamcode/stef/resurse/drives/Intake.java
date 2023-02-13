@@ -42,7 +42,7 @@ public class Intake {
             intake2.setPosition(1);
         }
 
-        if (!erotit) {
+        if (erotit) {
 //            rotire.setPosition(Ceva.servoToDegrees(180));
             rotire.setPosition(0);
         }else {

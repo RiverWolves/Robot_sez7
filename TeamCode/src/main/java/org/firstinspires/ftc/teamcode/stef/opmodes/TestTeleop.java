@@ -27,7 +27,7 @@ public class TestTeleop extends LinearOpMode {
         while (opModeIsActive()){
             Brat.loop(this);
 
-            Brat.input(gamepad1.right_bumper);
+
 
             telemetry.update();
 

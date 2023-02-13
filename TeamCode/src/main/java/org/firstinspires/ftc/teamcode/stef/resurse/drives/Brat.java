@@ -16,7 +16,7 @@ public class Brat {
 
     private static DcMotor brat = null;
 
-    private static boolean in, previn;
+    private static boolean in;
 
     private static Ceva ceva = null;
 
@@ -29,11 +29,8 @@ public class Brat {
     public static void init(){
         if(!SHardware.initializat) return;
 
-        in = false;
-        previn = false;
-        ceva = new Ceva();
-
         brat = SHardware.brat;
+        brat.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         brat.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         brat.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         brat.setPower(0);
@@ -51,6 +48,7 @@ public class Brat {
     }
 
     public static void loop(OpMode opMode){
+
         if (!in) {
             brat_fata();
 //            Intake.setRotire(!in);
@@ -63,8 +61,20 @@ public class Brat {
         brat.setTargetPosition(target);
         brat.setPower(0.4);
         brat.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
     }
+
+//    public static boolean poz_brat(){
+//        boolean poz;
+//
+//        if(brat.getCurrentPosition() > -650){
+//            poz = true;
+//        }
+//        else{
+//            poz = false;
+//        }
+//
+//        return poz;
+//    }
 
     public static void input(boolean buton) {
         in = buton;

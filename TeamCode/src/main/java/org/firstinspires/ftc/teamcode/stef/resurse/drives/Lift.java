@@ -17,7 +17,7 @@ public class Lift {
     private static final float LIMITARE_JOS_LIFT = 0;
     private static float y = 0;
     private static float putere = 1;
-    private static float pow_nivel = 0.4f;
+    private static float pow_nivel = 1;
     public static float pozitie_lift = 0;
 
     private static DcMotor lift1 = null,
