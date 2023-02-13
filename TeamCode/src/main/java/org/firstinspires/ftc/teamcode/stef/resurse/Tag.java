@@ -24,7 +24,7 @@ public class Tag {
 
     public static void start(OpMode op){
 
-        Brat.loop(op);
+        Brat.loop();
         Intake.loop(op);
         Lift.nivelLoop(op);
 

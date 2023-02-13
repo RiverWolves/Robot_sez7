@@ -12,12 +12,9 @@ import org.firstinspires.ftc.teamcode.stef.resurse.drives.Roti;
 
 public class SGamepad {
     private static float x, y, r, putere_lift;
-    private static boolean fc_roti,
-            fc_lift;
+    private static boolean fc_roti;
 
     private static Ceva inchis, rotit = null;
-
-
 
     public static void init() {
         x = 0;
@@ -26,7 +23,6 @@ public class SGamepad {
         putere_lift = 0;
 
         fc_roti = false;
-        fc_lift = false;
         inchis = new Ceva();
         rotit = new Ceva();
 
@@ -36,7 +32,6 @@ public class SGamepad {
 
         Gamepad gamepad1 = opMode.gamepad1;
         Gamepad gamepad2 = opMode.gamepad2;
-        fc_lift = gamepad2.left_bumper;    //conditie fine control lift
         fc_roti = gamepad1.left_bumper;   //conditie fine control roti
         putere_lift = -gamepad2.left_stick_y;
 
@@ -45,23 +40,6 @@ public class SGamepad {
         y = Ceva.fineControl(fc_roti, gamepad1.left_stick_y);           //setam puterea lui y
         r = Ceva.fineControl(fc_roti, gamepad1.right_stick_x);         //setam puterea lui r
         Roti.setVelXYR(x, y, r);
-
-
-     /*   STeleop.mecanum.setWeightedDrivePower(new Pose2d(
-                x,
-                y,
-                Math.toRadians(Ceva.mapF(r, -1, 1, -90, 90)))
-        );//atribuim puterile(x, y, r)
-
-        STeleop.mecanum.setWeightedDrivePower(new Pose2d(
-                -gamepad1.left_stick_y,
-                -gamepad1.left_stick_x,
-                -gamepad1.right_stick_x
-                )
-        );
-
-
-      */
 
         //Lift
         Lift.setVal(putere_lift,     //atribuim stick-ul
@@ -72,27 +50,30 @@ public class SGamepad {
         );
 
         //Intake
-        boolean buton1 = inchis.buttonToSwich(gamepad2.x); //transformam bumperul in switch
+        boolean buton1; //transformam bumperul in switch
         boolean buton2;
 
-        if(Lift.getPoz() > 800){
+
+        if(Lift.getPoz() > 1200){
             buton2 = rotit.buttonToSwich(gamepad2.right_bumper);
         }else {
             buton2 = true;
         }
 
-        Intake.setInchis(buton1); //setam starea intake-ului
-        Brat.input(buton2);
-        Intake.setRotire(!buton2);
 
 
-        //Brat
-//        boolean brat = Ceva.buttonToSwich(gamepad2.square);
+         //setam starea intake-ului
 
 
-//        opMode.telemetry.addData("buton ", nivel0);
-//        opMode.telemetry.update();
+        if(Math.abs(Brat.poz()) < 200){
+            buton1 = false;
+        }else {
+            buton1 =  inchis.buttonToSwich(gamepad2.square);
+        }
 
-        opMode.telemetry.addData("ceva : ", SHardware.ss.getCurrentPosition()+" "+ SHardware.df.getCurrentPosition()+" "+ SHardware.sf.getCurrentPosition());
+        Intake.setInchis(buton1);
+        Brat.input(!buton2);
+        Intake.setRotire(buton2);
+
     }
 }

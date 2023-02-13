@@ -42,7 +42,7 @@ public class Intake {
             intake2.setPosition(1);
         }
 
-        if (!erotit) {
+        if (erotit) {
 //            rotire.setPosition(Ceva.servoToDegrees(180));
             rotire.setPosition(0);
         }else {
@@ -56,10 +56,10 @@ public class Intake {
 
     }
 
-    public static void setInchis(boolean stare1){
-        inchis = stare1;
+    public static void setInchis(boolean stare){
+        inchis = stare;
     }
-    public static void setRotire(boolean stare2){
-        rotit = stare2;
+    public static void setRotire(boolean stare){
+        rotit = stare;
     }
 }

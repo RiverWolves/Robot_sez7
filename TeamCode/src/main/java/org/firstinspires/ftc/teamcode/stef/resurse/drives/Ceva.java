@@ -9,7 +9,7 @@ public class Ceva {
      boolean buttonState = false;
      boolean debounced = false;
 
-    private static final float constanta = 0.3f;
+     private static final float constanta = 0.3f;
 
 
      public boolean buttonToSwich(boolean buton) {

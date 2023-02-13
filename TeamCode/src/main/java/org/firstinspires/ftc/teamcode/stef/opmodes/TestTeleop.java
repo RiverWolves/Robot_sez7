@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.stef.resurse.SHardware;
 import org.firstinspires.ftc.teamcode.stef.resurse.drives.Brat;
-import org.firstinspires.ftc.teamcode.stef.resurse.drives.Intake;
 
 @TeleOp ( name = "teleop test")
 public class TestTeleop extends LinearOpMode {
@@ -25,9 +24,9 @@ public class TestTeleop extends LinearOpMode {
 
 
         while (opModeIsActive()){
-            Brat.loop(this);
+            Brat.loop();
 
-            Brat.input(gamepad1.right_bumper);
+
 
             telemetry.update();
 

@@ -12,12 +12,15 @@ public class Lift {
                             NIVEL_0 = 200,
                             NIVEL_1 = 2500,
                             NIVEL_2 = 4400,
-                            NIVEL_3 = 6800;
+                            NIVEL_3 = 6800,
+                            NIVEL_CON1 = 1040,
+                            NIVEL_CON2 = 725;
+
 
     private static final float LIMITARE_JOS_LIFT = 0;
     private static float y = 0;
     private static float putere = 1;
-    private static float pow_nivel = 0.4f;
+    private static float pow_nivel = 1;
     public static float pozitie_lift = 0;
 
     private static DcMotor lift1 = null,
@@ -158,19 +161,27 @@ public class Lift {
 
         switch (nivel) {
             case 0:
-                target_position = Lift.NIVEL_00;
+                target_position = NIVEL_00;
                 break;
 
             case 1:
-                target_position = Lift.NIVEL_1;
+                target_position = NIVEL_1;
                 break;
 
             case 2:
-                target_position = Lift.NIVEL_2;
+                target_position = NIVEL_2;
                 break;
 
             case 3:
-                target_position = Lift.NIVEL_3;
+                target_position = NIVEL_3;
+                break;
+
+            case 10 :
+                target_position = NIVEL_CON1;
+                break;
+
+            case 20 :
+                target_position = NIVEL_CON2;
                 break;
         }
 
