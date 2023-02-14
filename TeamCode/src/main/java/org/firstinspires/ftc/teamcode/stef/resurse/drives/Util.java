@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.stef.resurse.drives;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public class Ceva {
+public class Util {
 
      ElapsedTime et, lastDebounceTime;
      boolean buttonState = false;
@@ -24,18 +24,12 @@ public class Ceva {
         }
 
         if (buton) {
-            // reset the debouncing timer
             lastDebounceTime.reset();
         }
         if ((et.milliseconds() - lastDebounceTime.milliseconds()) > 50) {
-            // whatever the reading is at, it's been there for longer than the debounce
-            // delay, so take it as the actual current state:
-
-            // if the button state has changed:
             if (buton != buttonState) {
                 buttonState = buton;
 
-                // only toggle the LED if the new button state is HIGH
                 if (buttonState) {
                     debounced = !debounced;
                 }

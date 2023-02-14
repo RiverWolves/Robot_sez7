@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.stef.resurse.SHardware;
 public class Lift {
 
     public static final int LIMITARE_SUS_LIFT = 6800,
-                            NIVEL_00 = 0,
+                            LIMITARE_JOS_LIFT = 0,
                             NIVEL_0 = 200,
                             NIVEL_1 = 2500,
                             NIVEL_2 = 4400,
@@ -16,35 +16,28 @@ public class Lift {
                             NIVEL_CON1 = 1040,
                             NIVEL_CON2 = 725;
 
-
-    private static final float LIMITARE_JOS_LIFT = 0;
     private static float y = 0;
     private static float putere = 1;
     private static float pow_nivel = 1;
     public static float pozitie_lift = 0;
+    public static int target = 1;
 
     private static DcMotor lift1 = null,
                            lift2 = null;
 
     public static boolean enivel = false,
-            nivel0 = false,
-            nivel1 = false,
-            nivel2 = false,
-            nivel3 = false;
+                          nivel0 = false,
+                          nivel1 = false,
+                          nivel2 = false,
+                          nivel3 = false;
 
-    public static int nivel = 0,
-                      target = 1;
+    private static Util util_lift = new Util();
 
     public static  void init() {
-        if (!SHardware.initializat) {
-            return;
-        }
-        if (lift1 == null) {
-            lift1 = SHardware.lift1;
-        }
-        if (lift2 == null) {
-            lift2 = SHardware.lift2;
-        }
+        if (!SHardware.initializat) return;
+
+        lift1 = SHardware.lift1;
+        lift2 = SHardware.lift2;
 
         lift1.setTargetPosition(0);
         lift2.setTargetPosition(0);
@@ -66,7 +59,7 @@ public class Lift {
             putere = 0;
         }
 
-        putere = Ceva.fineControl(opMode.gamepad2.left_bumper, putere);
+        putere = util_lift.fineControl(opMode.gamepad2.left_bumper, putere);
 
         if (input != 0) {
             lift1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -78,31 +71,15 @@ public class Lift {
 
 
         if (input > 0.3f && pozitie_lift >= LIMITARE_SUS_LIFT){
-            Ceva.rumble(opMode.gamepad2);
+            util_lift.rumble(opMode.gamepad2);
         }
         else if (input < -0.3f && pozitie_lift <= LIMITARE_JOS_LIFT){
-            Ceva.rumble(opMode.gamepad2);
+            util_lift.rumble(opMode.gamepad2);
         }
-
-        opMode.telemetry.addData("input lift: ", input);
-        opMode.telemetry.addData("pozitie lift: ", pozitie_lift);
     }
 
     public static void nivelLoop(OpMode opMode) {
         int poz_lift = lift1.getCurrentPosition();
-
-        if (nivel0){
-            nivel = 0;
-        }
-        else if (nivel1){
-            nivel = 1;
-        }
-        else if (nivel2){
-            nivel = 2;
-        }
-        else if (nivel3){
-            nivel = 3;
-        }
 
         if (y == 0) {
             if (nivel0) {
@@ -147,13 +124,8 @@ public class Lift {
         }
 
         if (poz_lift <= target+10 && poz_lift >= target-10 && lift1.getPower() != 0){
-            Ceva.rumble(opMode.gamepad2);
+            util_lift.rumble(opMode.gamepad2);
         }
-
-        opMode.telemetry.addData("putere", lift2.getPower());
-        opMode.telemetry.addData("putere: ", lift1.getPower());
-        opMode.telemetry.addData("nivel: ", nivel);
-        opMode.telemetry.addData("Este nivel: ", enivel);
     }
 
     public static void setLiftLevel(int nivel) {
@@ -161,7 +133,7 @@ public class Lift {
 
         switch (nivel) {
             case 0:
-                target_position = NIVEL_00;
+                target_position = LIMITARE_JOS_LIFT;
                 break;
 
             case 1:
@@ -205,21 +177,6 @@ public class Lift {
 
     public static float getPoz() {
         return pozitie_lift;
-    }
-
-    public static void setNivel(int nivel) {
-        if(nivel == 0){
-            nivel0 = true;
-        }
-        else if(nivel == 1){
-            nivel1 = true;
-        }
-        else if(nivel == 2){
-            nivel2 = true;
-        }
-        else if(nivel == 3){
-            nivel3 = true;
-        }
     }
 }
 

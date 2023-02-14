@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.stef.resurse.drives.Lift;
 import org.firstinspires.ftc.teamcode.stef.resurse.tag.TagBase;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous( name = "amin" )
+@Autonomous( name = "Autonomie" )
 public class Parcare extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
@@ -22,7 +22,7 @@ public class Parcare extends LinearOpMode {
         Lift.init();
         Intake.init();
         Brat.init();
-//        TagBase.init(this);
+        TagBase.init(this);
 
         Intake.setInchis(true);
 
@@ -57,23 +57,27 @@ public class Parcare extends LinearOpMode {
                 .splineTo(new Vector2d(-18.7, -9.8), Math.toRadians(120) )
 
 
-                .waitSeconds(0.5)
-                .addDisplacementMarker(() ->{
-                Intake.setInchis(true);
-                Intake.loop(this);
+
+                .addTemporalMarker(() ->{
+                    Intake.setInchis(true);
+                    Intake.loop(this);
+
                 Lift.setLiftLevel(10);
                 })
+                .waitSeconds(0.5)
 
                 //Se aliniaza cu turnul de conuri
                 .back(4)
-                .waitSeconds(0.2)
                 .turn(Math.toRadians(60))
-                .splineTo(new Vector2d(-58, -16), Math.toRadians(180))
+                .splineTo(new Vector2d(-60, -14), Math.toRadians(180))
 
                 //Porneste spre pilon
-                .addDisplacementMarker(() ->{
+                .addTemporalMarker(() ->{
+                    Intake.setInchis(false);
+                    Intake.loop(this);
                 Lift.setLiftLevel(3);
                 })
+                .waitSeconds(0.5)
 
                 .setReversed(true)
 
@@ -85,26 +89,44 @@ public class Parcare extends LinearOpMode {
                     Brat.input(false);
                     Brat.loop();
                 })
-                .splineTo(new Vector2d(-31, -14), Math.toRadians(60))
-//                        .setConstraints(SampleMecanumDrive.getVelocityConstraint(
-//                        30, Math.toRadians(90), 11.89),
-//                        SampleMecanumDrive.getAccelerationConstraint(30))
 
-                //Se aliniaza spre turnul de conuri.
+                .splineTo(new Vector2d(-31, -11), Math.toRadians(60))
                 .setReversed(false)
-                 .addDisplacementMarker(() ->{
-                     Intake.setRotire(true);
+
+                .addTemporalMarker(() ->{
+
+                    Intake.setInchis(true);
+                    Intake.loop(this);
+                })
+                .waitSeconds(0.5)
+                 .addTemporalMarker(() ->{
+
+                     Intake.setInchis(false);
                      Intake.loop(this);
-                     Brat.input(true);
-                     Brat.loop();
+
                      Lift.setLiftLevel(20);
                  })
-                .waitSeconds(1.5)
+                .waitSeconds(0.5)
                 //Se intoarce
+                .addDisplacementMarker(()->{
+                    Intake.setRotire(true);
+                    Intake.loop(this);
+
+                    Brat.input(true);
+                    Brat.loop();
+                })
                 .splineTo(new Vector2d(-48, -16), Math.toRadians(180))
-                .splineTo(new Vector2d(-58, -16), Math.toRadians(180))
-                .addDisplacementMarker(() ->{
-                Lift.setLiftLevel(3);
+                .splineTo(new Vector2d(-60, -14), Math.toRadians(180))
+                .addTemporalMarker(() ->{
+                    Intake.setInchis(true);
+                    Intake.loop(this);
+                })
+                .waitSeconds(0.5)
+                .addTemporalMarker(() ->{
+                    Intake.setInchis(false);
+                    Intake.loop(this);
+
+                    Lift.setLiftLevel(3);
                 })
 
                 //Porneste spa puna con
@@ -120,19 +142,8 @@ public class Parcare extends LinearOpMode {
                         Brat.input(false);
                         Brat.loop();
                 })
-                .splineTo(new Vector2d(-31, -14), Math.toRadians(60))
-                //Se intoarce
-
+                .splineTo(new Vector2d(-31, -11), Math.toRadians(60))
                 .setReversed(false)
-                .waitSeconds(1.5)
-
-             /*   .addDisplacementMarker(() ->{
-                Intake.setRotire(true);
-                     Intake.loop(this);
-                     Brat.input(true);
-                     Brat.loop(this);
-                     Lift.setLiftLevel(0);
-                })*/
 
                 .build();
 
@@ -223,11 +234,24 @@ public class Parcare extends LinearOpMode {
 
         TrajectorySequence second = drive.trajectorySequenceBuilder(principala1.end())
 
+                .addTemporalMarker(() ->{
+
+                    Intake.setInchis(true);
+                    Intake.loop(this);
+                })
+                .waitSeconds(0.5)
+                .addTemporalMarker(()->{
+                    Intake.setInchis(false);
+                    Intake.loop(this);
+                })
+                .waitSeconds(0.5)
                 .addDisplacementMarker(() ->{
                     Intake.setRotire(true);
                     Intake.loop(this);
+
                     Brat.input(true);
                     Brat.loop();
+
                     Lift.setLiftLevel(0);
                 })
                 .splineTo(new Vector2d(-35, -16), Math.toRadians(180))
@@ -242,9 +266,9 @@ public class Parcare extends LinearOpMode {
                 .build();
 
 
-//        while (opModeInInit()){
-//            TagBase.update(this);
-//        }
+        while (opModeInInit()){
+            TagBase.update(this);
+        }
 
 
 
@@ -280,8 +304,8 @@ public class Parcare extends LinearOpMode {
 
 
         if(isStopRequested()) {
-//            TagBase.stop();
-            return;
+            TagBase.stop();
+            
         }
     }
 }

@@ -6,29 +6,18 @@ import org.firstinspires.ftc.teamcode.stef.resurse.SHardware;
 public class Brat {
 
     private static DcMotor brat = null;
-
     private static boolean in;
-
     private static int target = 0;
 
     public static void init(){
         if(!SHardware.initializat) return;
-
         brat = SHardware.brat;
-        brat.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        brat.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        brat.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         brat.setPower(0);
     }
 
     public static void loop(){
-
-        if (!in) {
-            brat_fata();
-        }
-        else {
-            brat_spate();
-        }
+        if (!in) { brat_fata(); }
+        else { brat_spate(); }
 
         brat.setTargetPosition(target);
         brat.setPower(0.4);

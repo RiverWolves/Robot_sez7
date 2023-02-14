@@ -33,8 +33,8 @@ public class Intake {
 
         if (einchis) {
 //            intake.setPosition(Ceva.servoToDegrees(300));
-            intake1.setPosition(0.15);
-            intake2.setPosition(0.85);
+            intake1.setPosition(0.1);
+            intake2.setPosition(0.9);
         }else {
 
 //            intake.setPosition(Ceva.servoToDegrees(250));
@@ -55,6 +55,8 @@ public class Intake {
         opMode.telemetry.addData("rotire", rotire.getPosition());
 
     }
+
+
 
     public static void setInchis(boolean stare){
         inchis = stare;
