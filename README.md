@@ -1,1 +1,2 @@
-# Codul robotului echipei RiverWolves RO049 prentru sezonul 7 FTC
+# Cod robot
+#RiverWolves RO049 prentru sezonul 7 FTC
