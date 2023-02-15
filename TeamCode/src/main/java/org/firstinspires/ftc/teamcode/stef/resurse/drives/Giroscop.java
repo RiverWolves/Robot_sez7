@@ -10,6 +10,7 @@ public class Giroscop {
 
     public static IMU imu = null;
     public static int unghi_y = 0;
+    public static int unghi_x = 0;
     public static boolean drept = true;
 
     public static void init() {
@@ -18,8 +19,9 @@ public class Giroscop {
 
     public static void loop() {
         unghi_y = (int) imu.getRobotYawPitchRollAngles().getPitch(AngleUnit.DEGREES);
+        unghi_x = (int) imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES);
 
-        drept = Math.abs(unghi_y) < 10;
+        drept = Math.abs(unghi_y) < 10 || Math.abs(unghi_x) < 10;
     }
 
 }

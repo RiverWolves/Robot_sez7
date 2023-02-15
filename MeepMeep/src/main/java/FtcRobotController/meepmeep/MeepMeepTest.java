@@ -15,93 +15,129 @@ public class MeepMeepTest {
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(20, 70, Math.toRadians(180), Math.toRadians(180), 11.99)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(-31.22, -61, Math.toRadians(90)))
+                        drive.trajectorySequenceBuilder(new Pose2d(31.22, -61, Math.toRadians(90)))
                                 //Porneste
                                 .forward(2.5)
-                                .waitSeconds(0.2)
-                                /*
-                                .addDisplacementMarker( () -> {
-                                   Intake.setInchis(false);
-                                   Intake.loop(this);
-                                   Lift.setLiftLevel(3);
-                                })
-                                */
+
+
+                                /*.addDisplacementMarker( () -> {
+                                    Intake.setInchis(false);
+                                    Intake.loop(this);
+                                    Lift.setLiftLevel(3);
+                                })*/
+
                                 //Pleaca spre mijloc
-                                .strafeRight(18)
-                                .waitSeconds(0.2)
-                                /* .addDisplacementMarker(()->{
-                                Brat.brat_fata();
-                                Brat.loop(this);
-                                })
-                                */
-                                // Mege la pilon
-                                .lineTo(new Vector2d(-11, -30))
+                                .strafeLeft(18)
 
-                                .splineTo(new Vector2d(-18, -8.8), Math.toRadians(120) )
+                                /*.addDisplacementMarker(()->{
+                                    Brat.input(true);
+                                    Brat.loop();
+                                })*/
 
-                                .waitSeconds(0.5)
-                                /*.addDisplacementMarker(() ->{
-                                Intake.setInchis(false);
-                                Intake.loop(this);
-                                Lift.setLiftLevel(0);
-                                })
-                                */
-                                //Se aliniaza cu turnul de conuri
-                                .back(4)
-                                .waitSeconds(0.2)
-                                .turn(Math.toRadians(60))
-                                .splineTo(new Vector2d(-59, -12), Math.toRadians(180))
+//                 Mege la pilon
+                                .lineTo(new Vector2d(12, -30))
 
-                                //Porneste spre pilon
-                                /*.addDisplacementMarker(() ->{
-                                Lift.setLiftLevel(3);
+                                .splineTo(new Vector2d(18.7, -9.8), Math.toRadians(60) )
+
+
+
+                               /* .addTemporalMarker(() ->{
+                                    Intake.setInchis(true);
+                                    Intake.loop(this);
+
+                                    Lift.setLiftLevel(10);
                                 })*/
                                 .waitSeconds(0.5)
+
+                                //Se aliniaza cu turnul de conuri
+                                .back(4)
+                                .turn(Math.toRadians(-60))
+                                .splineTo(new Vector2d(60, -14.5), Math.toRadians(0))
+
+                                //Porneste spre pilon
+                                /*.addTemporalMarker(()->{
+                                    Intake.setInchis(false);
+                                    Intake.loop(this);
+                                })*/
+                                .waitSeconds(0.3)
+                                /*.addTemporalMarker(() ->{
+                                    Lift.setLiftLevel(3);
+                                })*/
+                                .waitSeconds(0.5)
+
                                 .setReversed(true)
 
-                                .lineTo(new Vector2d(-51, -12))
-                                .splineTo(new Vector2d(-31, -12), Math.toRadians(60))
-                                .waitSeconds(1.5)
-                                //Se aliniaza spre turnul de conuri.
+                                .lineTo(new Vector2d(49, -15))
+                                /*.addDisplacementMarker( ()->{
+                                    Intake.setRotire(false);
+                                    Intake.loop(this);
+
+                                    Brat.input(false);
+                                    Brat.loop();
+                                })*/
+
+                                .splineTo(new Vector2d(31, -13.2), Math.toRadians(120))
                                 .setReversed(false)
-                                /* .addDisplacementMarker(() ->{
-                                     Lift.setLiftLevel(0);
-                                 })*/
-                                //Se intoarce
-                                .splineTo(new Vector2d(-48, -12), Math.toRadians(180))
-                                .splineTo(new Vector2d(-59, -12), Math.toRadians(180))
+
+                                /*.addTemporalMarker(() ->{
+
+                                    Intake.setInchis(true);
+                                    Intake.loop(this);
+                                })*/
+                                .waitSeconds(1)
+                                /*.addTemporalMarker(()->{
+                                    Intake.setInchis(false);
+                                    Intake.loop(this);
+                                })*/
+                                .waitSeconds(0.5)
                                 /*.addDisplacementMarker(() ->{
-                                Intake.setInchis(true);
-                                Intake.loop(this);
-                                Lift.setLiftLevel(3);
-                                })
-                                */
+                                    Intake.setRotire(true);
+                                    Intake.loop(this);
+
+                                    Brat.input(true);
+                                    Brat.loop();
+
+                                    Lift.setLiftLevel(20);
+                                })*/
+
+                                //Se intoarce
+                                .splineTo(new Vector2d(48, -14), Math.toRadians(0))
+                                /*.addDisplacementMarker(() ->{
+                                    Intake.setInchis(true);
+                                    Intake.loop(this);
+                                })*/
+                                .splineTo(new Vector2d( 60, -14.5), Math.toRadians(0))
+                               /* .UNSTABLE_addTemporalMarkerOffset(0.5, () ->{
+                                    Intake.setInchis(false);
+                                    Intake.loop(this);
+                                })*/
+                                .waitSeconds(1)
+                                /*.addTemporalMarker(()->{
+                                    Lift.setLiftLevel(3);
+                                })*/
+
                                 //Porneste spa puna con
 
                                 //  TODO: PUNE CON
                                 .waitSeconds(0.5)
                                 .setReversed(true)
-                                .lineTo(new Vector2d(-51, -12))
-                                .splineTo(new Vector2d(-31, -12), Math.toRadians(60))
-                                //Se intoarce
+                                .lineTo(new Vector2d(49, -15))
+                                /*.addDisplacementMarker( ()->{
+                                    Intake.setRotire(false);
+                                    Intake.loop(this);
 
+                                    Brat.input(false);
+                                    Brat.loop();
+                                })*/
+                                .splineTo(new Vector2d(31, -13.2), Math.toRadians(120))
                                 .setReversed(false)
-                                .waitSeconds(1.5)
 
-                                /*.addDisplacementMarker(() ->{
-                                Intake.setInchis(false);
-                                Intake.loop(this);
-                                Lift.setLiftLevel(0);
-                                })
-                                */
-                                .splineTo(new Vector2d(-48, -12), Math.toRadians(180))
-                                .splineTo(new Vector2d(-59, -12), Math.toRadians(180))
-                                .build()
-                );
+                                .build());
 
 
 
-        meepMeep.setBackground(MeepMeep.Background.FIELD_POWERPLAY_KAI_DARK)
+
+        meepMeep.setBackground(MeepMeep.Background.FIELD_POWERPLAY_OFFICIAL)
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
                 .addEntity(myBot)
