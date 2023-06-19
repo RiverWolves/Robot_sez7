@@ -23,7 +23,6 @@ public class DAutonomie extends LinearOpMode {
         Intake.init();
         Brat.init();
         TagBase.init(this);
-
         Intake.setInchis(true);
 
         ElapsedTime et = new ElapsedTime();
@@ -32,7 +31,7 @@ public class DAutonomie extends LinearOpMode {
 
         drive.setPoseEstimate(new Pose2d(31.22, -62, Math.toRadians(90)));
 
-        TrajectorySequence TraiectorieStanga = drive.trajectorySequenceBuilder(new Pose2d(31.22, -61, Math.toRadians(90)))
+        TrajectorySequence TraiectorieStanga = drive.trajectorySequenceBuilder(new Pose2d(30.7, -61, Math.toRadians(90)))
                 //Porneste
                 .forward(2.5)
 
@@ -54,7 +53,7 @@ public class DAutonomie extends LinearOpMode {
 //                 Mege la pilon
                 .lineTo(new Vector2d(12, -30))
 
-                .splineTo(new Vector2d(18.7, -9.8), Math.toRadians(60) )
+                .splineTo(new Vector2d(21, -8.8), Math.toRadians(60) )
 
 
 
@@ -69,7 +68,7 @@ public class DAutonomie extends LinearOpMode {
                 //Se aliniaza cu turnul de conuri
                 .back(4)
                 .turn(Math.toRadians(-60))
-                .splineTo(new Vector2d(60, -14.5), Math.toRadians(0))
+                .splineTo(new Vector2d(61, -14.5), Math.toRadians(0))
 
                 //Porneste spre pilon
                 .addTemporalMarker(()->{
@@ -84,7 +83,7 @@ public class DAutonomie extends LinearOpMode {
 
                 .setReversed(true)
 
-                .lineTo(new Vector2d(49, -15))
+                .lineTo(new Vector2d(45, -13))
                 .addDisplacementMarker( ()->{
                     Intake.setRotire(false);
                     Intake.loop(this);
@@ -93,10 +92,10 @@ public class DAutonomie extends LinearOpMode {
                     Brat.loop();
                 })
 
-                .splineTo(new Vector2d(31, -13.2), Math.toRadians(120))
+                .splineTo(new Vector2d(31.2, -11.7), Math.toRadians(120))
                 .setReversed(false)
 
-                .addTemporalMarker(() ->{
+                .UNSTABLE_addTemporalMarkerOffset(0.41, () ->{
 
                     Intake.setInchis(true);
                     Intake.loop(this);
@@ -105,9 +104,11 @@ public class DAutonomie extends LinearOpMode {
                 .addTemporalMarker(()->{
                     Intake.setInchis(false);
                     Intake.loop(this);
+
+
                 })
                 .waitSeconds(0.5)
-                .addDisplacementMarker(() ->{
+                .UNSTABLE_addTemporalMarkerOffset(-0.2, () ->{
                     Intake.setRotire(true);
                     Intake.loop(this);
 
@@ -116,6 +117,8 @@ public class DAutonomie extends LinearOpMode {
 
                     Lift.setLiftLevel(20);
                 })
+                .waitSeconds(0.5)
+
 
                 //Se intoarce
                 .splineTo(new Vector2d(48, -14), Math.toRadians(0))
@@ -123,7 +126,7 @@ public class DAutonomie extends LinearOpMode {
                     Intake.setInchis(true);
                     Intake.loop(this);
                 })
-                .splineTo(new Vector2d( 60, -14.5), Math.toRadians(0))
+                .splineTo(new Vector2d( 60.5, -14.5), Math.toRadians(0))
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () ->{
                     Intake.setInchis(false);
                     Intake.loop(this);
@@ -138,7 +141,7 @@ public class DAutonomie extends LinearOpMode {
                 //  TODO: PUNE CON
                 .waitSeconds(0.5)
                 .setReversed(true)
-                .lineTo(new Vector2d(49, -15))
+                .lineTo(new Vector2d(46, -13))
                 .addDisplacementMarker( ()->{
                         Intake.setRotire(false);
                         Intake.loop(this);
@@ -146,13 +149,13 @@ public class DAutonomie extends LinearOpMode {
                         Brat.input(false);
                         Brat.loop();
                 })
-                .splineTo(new Vector2d(31, -13.2), Math.toRadians(120))
+                .splineTo(new Vector2d(31.8, -11.7), Math.toRadians(120))
                 .setReversed(false)
 
                 .build();
 
 
-        TrajectorySequence first = drive.trajectorySequenceBuilder(TraiectorieStanga.end())
+        TrajectorySequence third = drive.trajectorySequenceBuilder(TraiectorieStanga.end())
 
                 .addTemporalMarker(() ->{
 
@@ -174,8 +177,12 @@ public class DAutonomie extends LinearOpMode {
 
                     Lift.setLiftLevel(0);
                 })
-                .splineTo(new Vector2d(-35, -16), Math.toRadians(180))
-                .lineTo(new Vector2d(-60, -16))
+                .splineTo(new Vector2d(35, -13), Math.toRadians(0))
+                .addDisplacementMarker(()->{
+                    Intake.setInchis(true);
+                    Intake.loop(this);
+                })
+                .lineTo(new Vector2d(60, -13))
                 .build();
 
         TrajectorySequence second = drive.trajectorySequenceBuilder(TraiectorieStanga.end())
@@ -185,6 +192,35 @@ public class DAutonomie extends LinearOpMode {
                     Intake.setInchis(true);
                     Intake.loop(this);
                 })
+                .waitSeconds(1.5)
+                .addTemporalMarker(()->{
+                    Intake.setInchis(false);
+                    Intake.loop(this);
+                })
+                .waitSeconds(0.5)
+                .addDisplacementMarker(() ->{
+                    Intake.setRotire(true);
+                    Intake.loop(this);
+
+                    Brat.input(true);
+                    Brat.loop();
+
+                    Lift.setLiftLevel(0);
+                })
+                .splineTo(new Vector2d(35, -16), Math.toRadians(0))
+
+                .waitSeconds(10)
+
+                .build();
+
+        TrajectorySequence first = drive.trajectorySequenceBuilder(TraiectorieStanga.end())
+
+                .addTemporalMarker(() ->{
+
+
+                    Intake.setInchis(true);
+                    Intake.loop(this);
+                })
                 .waitSeconds(1)
                 .addTemporalMarker(()->{
                     Intake.setInchis(false);
@@ -200,20 +236,15 @@ public class DAutonomie extends LinearOpMode {
 
                     Lift.setLiftLevel(0);
                 })
-                .splineTo(new Vector2d(-35, -16), Math.toRadians(180))
-
-                .waitSeconds(10)
-
-                .build();
-
-        TrajectorySequence third = drive.trajectorySequenceBuilder(TraiectorieStanga.end())
-
-                .lineTo(new Vector2d(-12,-16))
+                .splineTo(new Vector2d(35, -16), Math.toRadians(0))
+                .lineTo(new Vector2d(12,-16))
                 .build();
 
 
         while (opModeInInit()){
             TagBase.update(this);
+            telemetry.addData("id", TagBase.tag());
+            telemetry.update();
         }
 
 

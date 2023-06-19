@@ -3,7 +3,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.stef.resurse.SHardware;
 
-public class Brat {
+public class  Brat {
 
     private static DcMotor brat = null;
     private static boolean in;
@@ -11,8 +11,11 @@ public class Brat {
 
     public static void init(){
         if(!SHardware.initializat) return;
+
         brat = SHardware.brat;
-        brat.setPower(0);
+        brat.setTargetPosition(-200);
+        brat.setPower(0.4);
+        brat.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public static void loop(){

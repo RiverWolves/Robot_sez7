@@ -76,7 +76,7 @@ public class MeepMeepTest {
                                     Brat.loop();
                                 })*/
 
-                                .splineTo(new Vector2d(31, -13.2), Math.toRadians(120))
+                                .splineTo(new Vector2d(31, -11.2), Math.toRadians(120))
                                 .setReversed(false)
 
                                 /*.addTemporalMarker(() ->{
@@ -129,7 +129,7 @@ public class MeepMeepTest {
                                     Brat.input(false);
                                     Brat.loop();
                                 })*/
-                                .splineTo(new Vector2d(31, -13.2), Math.toRadians(120))
+                                .splineTo(new Vector2d(31, -11.2), Math.toRadians(120))
                                 .setReversed(false)
 
                                 .build());

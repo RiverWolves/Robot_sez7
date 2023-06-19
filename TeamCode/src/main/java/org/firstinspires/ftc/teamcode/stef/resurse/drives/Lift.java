@@ -7,14 +7,14 @@ import org.firstinspires.ftc.teamcode.stef.resurse.SHardware;
 
 public class Lift {
 
-    public static final int LIMITARE_SUS_LIFT = 6800,
+    public static final int LIMITARE_SUS_LIFT = 4200, //6800
                             LIMITARE_JOS_LIFT = 0,
                             NIVEL_0 = 200,
-                            NIVEL_1 = 2500,
-                            NIVEL_2 = 4400,
-                            NIVEL_3 = 6800,
-                            NIVEL_CON1 = 1040,
-                            NIVEL_CON2 = 725;
+                            NIVEL_1 = 1650,
+                            NIVEL_2 = 2820,
+                            NIVEL_3 = 4100,
+                            NIVEL_CON1 = 642,
+                            NIVEL_CON2 = 450;
 
     private static float y = 0;
     private static float putere = 1;
@@ -49,10 +49,10 @@ public class Lift {
         float input = y;
         pozitie_lift = lift1.getCurrentPosition();
 
-        if (input > 0.3f && pozitie_lift < LIMITARE_SUS_LIFT) {
+        if (input > 0.1f && pozitie_lift < LIMITARE_SUS_LIFT) {
             putere = 1;
         }
-        else if (input < -0.3f && pozitie_lift > LIMITARE_JOS_LIFT) {
+        else if (input < -0.1f && pozitie_lift > LIMITARE_JOS_LIFT) {
            putere = -1;
         }
         else {
@@ -76,6 +76,9 @@ public class Lift {
         else if (input < -0.3f && pozitie_lift <= LIMITARE_JOS_LIFT){
             util_lift.rumble(opMode.gamepad2);
         }
+
+        opMode.telemetry.
+                addData("lift", lift1.getCurrentPosition());
     }
 
     public static void nivelLoop(OpMode opMode) {
@@ -98,6 +101,10 @@ public class Lift {
                 target = NIVEL_3;
                 pow_nivel = 1;
             }
+        }
+        else if (poz_lift < LIMITARE_JOS_LIFT){
+            target = 0;
+            pow_nivel = 1;
         }
         else {
             target = 0;

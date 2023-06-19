@@ -26,7 +26,7 @@ public class Util {
         if (buton) {
             lastDebounceTime.reset();
         }
-        if ((et.milliseconds() - lastDebounceTime.milliseconds()) > 50) {
+        if ((et.milliseconds() - lastDebounceTime.milliseconds()) > 20) {
             if (buton != buttonState) {
                 buttonState = buton;
 

@@ -43,25 +43,53 @@ public class SGamepad {
         //Roti
         fc_roti = gamepad1.left_bumper;
 
-        y = roti.fineControl(fc_roti, -gamepad1.left_stick_x);            //setam puterea lui x
-        x = roti.fineControl(fc_roti, -gamepad1.left_stick_y);           //setam puterea lui y
-        r = roti.fineControl(fc_roti, -gamepad1.right_stick_x);         //setam puterea lui r
-
-
-        if (Giroscop.drept) {
-            mecanum.setWeightedDrivePower(
-                    new Pose2d(x, y, r)
-            );
-        } else {
-            mecanum.setWeightedDrivePower(
-                    new Pose2d(-0.3*x, -0.3*y, r)
-            );
+        if (Math.abs(-gamepad1.left_stick_y) > 0.1){
+            x = roti.fineControl(fc_roti, -gamepad1.left_stick_y);
+        }else  if(gamepad1.dpad_up)
+        {
+            x = roti.fineControl(fc_roti, 1);
+        }else  if(gamepad1.dpad_down)
+        {
+            x = roti.fineControl(fc_roti, -1);
+        }else {
+            x = 0;
         }
+
+
+        if (Math.abs(-gamepad1.left_stick_x) > 0.1){
+            y = roti.fineControl(fc_roti, -gamepad1.left_stick_x);
+        }else  if(gamepad1.dpad_left)
+        {
+            y = roti.fineControl(fc_roti, 1);
+        }else  if(gamepad1.dpad_right)
+        {
+            y = roti.fineControl(fc_roti, -1);
+        }else {
+            y = 0;
+        }
+            r = roti.fineControl(fc_roti, -gamepad1.right_stick_x);
+
+
+        mecanum.setWeightedDrivePower(
+                new Pose2d(x, y, r)
+        );
+
+
+
+//        if (Giroscop.drept) {
+//            mecanum.setWeightedDrivePower(
+//                    new Pose2d(x, y, r)
+//            );
+//        } else {
+//            mecanum.setWeightedDrivePower(
+//                    new Pose2d(-0.3*x, -0.3*y, r)
+//            );
+//        }
 
 
 
         //Lift
-        putere_lift = lift.fineControl(gamepad2.right_bumper, -gamepad2.left_stick_y);
+        putere_lift = lift.fineControl(gamepad2.left_bumper, -gamepad2.left_stick_y);
         Lift.setVal(putere_lift,     //atribuim stick-ul
                 gamepad2.dpad_down,            //nivel 0
                 gamepad2.dpad_right,           //nivel 1
@@ -72,18 +100,12 @@ public class SGamepad {
         //Intake + Brat
 
         //Safety mode brat
-        if(Lift.getPoz() > 1200){
+        if(Lift.getPoz() > 740){
             buton2 = rotit.buttonToSwich(gamepad2.right_bumper);
         }else {
             buton2 = false;
         }
-
-        //Safetey mode rotire cleste
         buton1 = inchis.buttonToSwich(gamepad2.x);
-
-        if(Brat.poz() < 400 && Brat.poz() > 100){
-            buton1 = false;
-        }
 
         Intake.setInchis(buton1);
         Brat.input(!buton2);

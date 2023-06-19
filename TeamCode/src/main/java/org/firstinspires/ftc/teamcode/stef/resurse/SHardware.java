@@ -37,9 +37,9 @@ public class SHardware {
         lift2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         lift1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        lift1.setDirection(DcMotor.Direction.REVERSE);
 
         lift2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        lift2.setDirection(DcMotor.Direction.REVERSE);
 
 
 

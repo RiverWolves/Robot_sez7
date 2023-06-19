@@ -23,7 +23,7 @@ public class Intake {
 
         intake1.setPosition(0);
         intake2.setPosition(1);
-        rotire.setPosition(0);
+        rotire.setPosition(1);
     }
 
     public static void loop(OpMode opMode){
@@ -44,10 +44,10 @@ public class Intake {
 
         if (erotit) {
 //            rotire.setPosition(Ceva.servoToDegrees(180));
-            rotire.setPosition(0);
+            rotire.setPosition(1);
         }else {
 //            rotire.setPosition(Ceva.servoToDegrees(0));
-            rotire.setPosition(0.68);
+            rotire.setPosition(0.36);
         }
 
 
