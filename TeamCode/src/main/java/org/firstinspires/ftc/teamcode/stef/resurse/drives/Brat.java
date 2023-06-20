@@ -33,7 +33,7 @@ public class  Brat {
 
     public static void input(boolean buton) {
         in = buton;
-    }
+    } //false= spate true = fata
 
     public static void brat_fata() {
         target = 650;

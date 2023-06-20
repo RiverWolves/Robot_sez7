@@ -59,7 +59,7 @@ public class Intake {
 
 
     public static void setInchis(boolean stare){
-        inchis = stare;
+        inchis = !stare;
     }
     public static void setRotire(boolean stare){
         rotit = stare;

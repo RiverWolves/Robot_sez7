@@ -14,7 +14,8 @@ public class Lift {
                             NIVEL_2 = 2820,
                             NIVEL_3 = 4100,
                             NIVEL_CON1 = 642,
-                            NIVEL_CON2 = 450;
+                            NIVEL_CON2 = 450,
+                            NIVEL_CON3 = 258;
 
     private static float y = 0;
     private static float putere = 1;
@@ -130,9 +131,9 @@ public class Lift {
             enivel = false;
         }
 
-        if (poz_lift <= target+10 && poz_lift >= target-10 && lift1.getPower() != 0){
-            util_lift.rumble(opMode.gamepad2);
-        }
+//        if (poz_lift <= target+10 && poz_lift >= target-10 && lift1.getPower() != 0){
+//            util_lift.rumble(opMode.gamepad2);
+//        }
     }
 
     public static void setLiftLevel(int nivel) {
@@ -161,6 +162,10 @@ public class Lift {
 
             case 20 :
                 target_position = NIVEL_CON2;
+                break;
+
+            case 30 :
+                target_position = NIVEL_CON3;
                 break;
         }
 
