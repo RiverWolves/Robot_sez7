@@ -11,19 +11,17 @@ public class Intake {
     public static boolean inchis;
     public static boolean rotit;
 
-    public static void init(){
+    public static void init(OpMode opMode){
         if (!SHardware.initializat) return;
-//
+
         inchis = false;
-        rotit = true;
+        rotit = false;
 
         intake1 = SHardware.intake1;
         intake2 = SHardware.intake2;
         rotire = SHardware.rotire;
 
-        intake1.setPosition(0);
-        intake2.setPosition(1);
-        rotire.setPosition(1);
+        loop(opMode);
     }
 
     public static void loop(OpMode opMode){
@@ -60,8 +58,18 @@ public class Intake {
 
     public static void setInchis(boolean stare){
         inchis = !stare;
+
+    }
+    public static void setInchis2in1(boolean stare , OpMode opmode){
+        inchis = !stare;
+        loop(opmode);
     }
     public static void setRotire(boolean stare){
         rotit = stare;
     }
+    public static void setRotire2in1(boolean stare , OpMode opmode){
+        rotit = !stare;
+        loop(opmode);
+    }
+
 }

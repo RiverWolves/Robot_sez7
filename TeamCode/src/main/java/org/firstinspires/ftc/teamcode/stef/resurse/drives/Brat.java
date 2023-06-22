@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode.stef.resurse.drives;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.stef.resurse.SHardware;
@@ -13,7 +14,7 @@ public class  Brat {
         if(!SHardware.initializat) return;
 
         brat = SHardware.brat;
-        brat.setTargetPosition(-200);
+        brat.setTargetPosition(0);
         brat.setPower(0.4);
         brat.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
@@ -34,6 +35,10 @@ public class  Brat {
     public static void input(boolean buton) {
         in = buton;
     } //false= spate true = fata
+    public static void setRotireFata(boolean stare){
+        in = stare;
+        loop();
+    }
 
     public static void brat_fata() {
         target = 650;

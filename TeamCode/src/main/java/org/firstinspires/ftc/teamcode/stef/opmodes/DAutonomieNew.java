@@ -14,8 +14,13 @@ import org.firstinspires.ftc.teamcode.stef.resurse.drives.Lift;
 import org.firstinspires.ftc.teamcode.stef.resurse.tag.TagBase;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous( name = "AutonomieDreapta" )
-public class DAutonomie extends LinearOpMode {
+@Autonomous( name = "AutonomieDreaptaNew" )
+public class DAutonomieNew extends LinearOpMode {
+    public static Pose2d A = new Pose2d(36,-60.5 , Math.toRadians(270));
+    public static Vector2d B = new Vector2d(36,-24 ); public  static double BU = Math.toRadians(270); // BU = Unghiul B
+    public static Vector2d C = new Vector2d(29.81,-11.6 ); public  static double CU = Math.toRadians(118);
+    public static Vector2d D = new Vector2d(48,-12.5 ); public  static double DU = Math.toRadians(0);
+    public static Vector2d E = new Vector2d(60,-13.5  ); public  static double EU = Math.toRadians(0);
     @Override
     public void runOpMode() throws InterruptedException {
         SHardware.init(this, true);
@@ -29,127 +34,59 @@ public class DAutonomie extends LinearOpMode {
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        drive.setPoseEstimate(new Pose2d(31.22, -62, Math.toRadians(90)));
+        drive.setPoseEstimate(A);
 
-        TrajectorySequence TraiectorieStanga = drive.trajectorySequenceBuilder(new Pose2d(30.7, -61, Math.toRadians(90)))
-                //Porneste
-                .forward(2.5)
-
-
-                .addDisplacementMarker( () -> {
-                   Intake.setInchis(false);
-                   Intake.loop(this);
-                   Lift.setLiftLevel(3);
-                })
-
-                //Pleaca spre mijloc
-                .strafeLeft(18)
-
-                 .addDisplacementMarker(()->{
-                Brat.input(true);
-                Brat.loop();
-                })
-
-//                 Mege la pilon
-                .lineTo(new Vector2d(12, -30))
-
-                .splineTo(new Vector2d(21, -8.8), Math.toRadians(60) )
-
-
-
-                .addTemporalMarker(() ->{
-                    Intake.setInchis(true);
-                    Intake.loop(this);
-
-                Lift.setLiftLevel(10);
-                })
-                .waitSeconds(0.5)
-
-                //Se aliniaza cu turnul de conuri
-                .back(4)
-                .turn(Math.toRadians(-60))
-                .splineTo(new Vector2d(61, -14.5), Math.toRadians(0))
-
-                //Porneste spre pilon
-                .addTemporalMarker(()->{
-                    Intake.setInchis(false);
-                    Intake.loop(this);
-                })
-                .waitSeconds(0.3)
-                .addTemporalMarker(() ->{
-                Lift.setLiftLevel(3);
-                })
-                .waitSeconds(0.5)
-
+        TrajectorySequence TraiectorieStanga = drive.trajectorySequenceBuilder(A)
                 .setReversed(true)
-
-                .lineTo(new Vector2d(45, -13))
-                .addDisplacementMarker( ()->{
-                    Intake.setRotire(false);
-                    Intake.loop(this);
-
-                    Brat.input(false);
-                    Brat.loop();
-                })
-
-                .splineTo(new Vector2d(31.2, -11.7), Math.toRadians(120))
-                .setReversed(false)
-
-                .UNSTABLE_addTemporalMarkerOffset(0.41, () ->{
-
-                    Intake.setInchis(true);
-                    Intake.loop(this);
-                })
-                .waitSeconds(1)
-                .addTemporalMarker(()->{
-                    Intake.setInchis(false);
-                    Intake.loop(this);
-
-
-                })
-                .waitSeconds(0.5)
-                .UNSTABLE_addTemporalMarkerOffset(-0.2, () ->{
-                    Intake.setRotire(true);
-                    Intake.loop(this);
-
-                    Brat.input(true);
-                    Brat.loop();
-
-                    Lift.setLiftLevel(20);
-                })
-                .waitSeconds(0.5)
-
-
-                //Se intoarce
-                .splineTo(new Vector2d(48, -14), Math.toRadians(0))
-                .addDisplacementMarker(() ->{
-                    Intake.setInchis(true);
-                    Intake.loop(this);
-                })
-                .splineTo(new Vector2d( 60.5, -14.5), Math.toRadians(0))
-                .UNSTABLE_addTemporalMarkerOffset(0.5, () ->{
-                    Intake.setInchis(false);
-                    Intake.loop(this);
-                })
-                .waitSeconds(1)
-                .addTemporalMarker(()->{
+                .addDisplacementMarker(()->{
+                    //Brat dat peste cap
+                    Intake.setInchis2in1(true,this);
+                    Brat.setRotireFata(false);
                     Lift.setLiftLevel(3);
                 })
+                .lineTo(B)
+                 .addDisplacementMarker( () -> {
+                      Intake.setRotire2in1(true,this);
+                 })
+                .splineTo(C, CU) //Ajunge la stalp
+                 .UNSTABLE_addTemporalMarkerOffset(0, () ->{  //deschide clestele?????
+                     Intake.setInchis2in1(false,this);
+                 })
+                .waitSeconds(0.3)
+                //Incepe loop de la turn
+                .setReversed(false)
+                 .addDisplacementMarker( () -> {
+                   Intake.setInchis2in1(true,this);
+                   Lift.setLiftLevel(10);
+                   //Brat dat peste cap
+                   Intake.setRotire2in1(false,this);
+                   Brat.setRotireFata(true);
+                   Intake.setInchis2in1(false,this);
+                 })
+                .splineTo(D,DU)
+                .lineTo(E) //Ajunge la turnul de conuri
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                   Intake.setInchis2in1(true,this);
+//                   Lift.setLiftLevel(1);
+               })
+                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
 
-                //Porneste spa puna con
-
-                //  TODO: PUNE CON
+                   Lift.setLiftLevel(1);
+                })
                 .waitSeconds(0.5)
                 .setReversed(true)
-                .lineTo(new Vector2d(46, -13))
-                .addDisplacementMarker( ()->{
-                        Intake.setRotire(false);
-                        Intake.loop(this);
-
-                        Brat.input(false);
-                        Brat.loop();
+                .lineTo(D)
+                .addDisplacementMarker(() ->{
+                    Lift.setLiftLevel(3);
+                    //Brat dat peste cap
+                    Intake.setRotire2in1(true,this);
+                    Brat.setRotireFata(false);
                 })
-                .splineTo(new Vector2d(31.8, -11.7), Math.toRadians(120))
+                .splineTo(C,CU)
+                 .UNSTABLE_addTemporalMarkerOffset(0, () ->{  //deschide clestele?????
+                   Intake.setInchis2in1(false,this);
+               })
+                .waitSeconds(0.5)
                 .setReversed(false)
 
                 .build();
@@ -215,28 +152,16 @@ public class DAutonomie extends LinearOpMode {
 
         TrajectorySequence first = drive.trajectorySequenceBuilder(TraiectorieStanga.end())
 
-                .addTemporalMarker(() ->{
-
-
-                    Intake.setInchis(true);
-                    Intake.loop(this);
-                })
-                .waitSeconds(1)
-                .addTemporalMarker(()->{
-                    Intake.setInchis(false);
-                    Intake.loop(this);
-                })
-                .waitSeconds(0.5)
-                .addDisplacementMarker(() ->{
-                    Intake.setRotire(true);
-                    Intake.loop(this);
-
-                    Brat.input(true);
-                    Brat.loop();
-
-                    Lift.setLiftLevel(0);
+                .addDisplacementMarker(()-> {
+                    Intake.setInchis2in1(true, this);
+                    Brat.setRotireFata(true);
+                    Intake.setRotire2in1(false, this);
+                    Lift.setLiftLevel(10);
                 })
                 .splineTo(new Vector2d(35, -16), Math.toRadians(0))
+                .addDisplacementMarker(()->{
+                    Intake.setInchis2in1(false, this);
+                })
                 .lineTo(new Vector2d(12,-16))
                 .build();
 
@@ -263,10 +188,10 @@ public class DAutonomie extends LinearOpMode {
 
 
             switch (TagBase.tag()){
-                case 1:
+                case 2:
                     drive.followTrajectorySequence(first);
                     break;
-                case 2:
+                case 1:
                     drive.followTrajectorySequence(second);
                     break;
                 case 3:

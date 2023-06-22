@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.stef.resurse.drives.Lift;
 import org.firstinspires.ftc.teamcode.stef.resurse.tag.TagBase;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous( name = "Autonomie_Stanga" )
-public class SAutonomie extends LinearOpMode {
+@Autonomous( name = "Autonomie_StangaNew" )
+public class SAutonomieNew extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         SHardware.init(this, true);

@@ -24,187 +24,151 @@ public class MeepMeepTest {
                         drive.trajectorySequenceBuilder(A)
                                 .setReversed(true)
                                 /*.addDisplacementMarker(()->{
-                                    Intake.setInchis(true); //Inchide clestele ca sa nu-l scape la inceput
-                                    Intake.loop(this);
+                                    Intake.setInchis2in1(true,this);
                                 })*/
                                 .lineTo(B)
-                               /* .addDisplacementMarker( () -> {
+                                /*.addDisplacementMarker( () -> {
 
                                     Lift.setLiftLevel(3);
                                     //Brat dat peste cap
-                                     Intake.setRotire(true);
-                                     Intake.loop(this);
-                                     Brat.input(false);
-                                     Brat.loop();
+                                    Intake.setRotire2in1(true,this);
+                                    Brat.setRotireFata(false);
                                 })*/
                                 .splineTo(C, CU) //Ajunge la stalp
-                               /* .UNSTABLE_addTemporalMarkerOffset(0.41, () ->{  //deschide clestele?????
-                                    Intake.setInchis(false);
-                                    Intake.loop(this);
+                                /*.UNSTABLE_addTemporalMarkerOffset(0.41, () ->{  //deschide clestele?????
+                                    Intake.setInchis2in1(false,this);
                                 })*/
                                 .waitSeconds(0.5)
                                 //Incepe loop de la turn
                                 .setReversed(false)
-                                /* .addDisplacementMarker( () -> {
-                                   Intake.setInchis(true);
-                                   Intake.loop(this);
-                                   Lift.setLiftLevel(10);
-                                   //Brat dat peste cap
-                                   Intake.setRotire(false);
-                                   Intake.loop(this);
-                                   Brat.input(true);
-                                   Brat.loop();
-                               })*/
+                                /*.addDisplacementMarker( () -> {
+                                    Intake.setInchis2in1(true,this);
+                                    Lift.setLiftLevel(10);
+                                    //Brat dat peste cap
+                                    Intake.setRotire2in1(false,this);
+                                    Brat.setRotireFata(true);
+                                })*/
                                 .splineTo(D,DU)
-                                /* .addDisplacementMarker( () -> {
-                                   Intake.setInchis(false);
-                                   Intake.loop(this);
-                               })*/
+                                /*.addDisplacementMarker( () -> {
+                                    Intake.setInchis2in1(false,this);
+                                })*/
                                 .lineTo(E) //Ajunge la turnul de conuri
-                                /*.UNSTABLE_addTemporalMarkerOffset( () -> {
-                                   Intake.setInchis(true);
-                                   Intake.loop(this);
-                                   Lift.setLiftLevel(1);
-                               })*/
+                                /*.UNSTABLE_addTemporalMarkerOffset(0.41, () -> {
+                                    Intake.setInchis2in1(true,this);
+                                    Lift.setLiftLevel(1);
+                                })*/
                                 .waitSeconds(0.5)
                                 .setReversed(true)
                                 .lineTo(D)
                                 /*.addDisplacementMarker(() ->{
                                     Lift.setLiftLevel(3);
                                     //Brat dat peste cap
-                                    Intake.setRotire(true);
-                                    Intake.loop(this);
-                                    Brat.input(false);
-                                    Brat.loop();
+                                    Intake.setRotire2in1(true,this);
+                                    Brat.setRotireFata(false);
                                 })*/
                                 .splineTo(C,CU)
-                                /* .UNSTABLE_addTemporalMarkerOffset(0.41, () ->{  //deschide clestele?????
-                                   Intake.setInchis(false);
-                                   Intake.loop(this);
-                               })*/
+                                /*.UNSTABLE_addTemporalMarkerOffset(0.41, () ->{  //deschide clestele?????
+                                    Intake.setRotire2in1(false,this);
+                                })*/
                                 .waitSeconds(0.5)
                                 .setReversed(false)
                                 //Incepe loop de la turn
                                 .setReversed(false)
-                                /* .addDisplacementMarker( () -> {
-                                   Intake.setInchis(true);
-                                   Intake.loop(this);
-                                   Lift.setLiftLevel(10);
-                                   //Brat dat peste cap
-                                   Intake.setRotire(false);
-                                   Intake.loop(this);
-                                   Brat.input(true);
-                                   Brat.loop();
-                               })*/
+                                /*.addDisplacementMarker( () -> {
+                                    Intake.setRotire2in1(true,this);
+                                    Lift.setLiftLevel(10);
+                                    //Brat dat peste cap
+                                    Intake.setRotire2in1(false,this);
+                                    Brat.setRotireFata(true);
+                                })*/
                                 .splineTo(D,DU)
-                                /* .addDisplacementMarker( () -> {
-                                   Intake.setInchis(false);
-                                   Intake.loop(this);
-                               })*/
+                                /*.addDisplacementMarker( () -> {
+                                    Intake.setInchis2in1(false,this);
+                                })*/
                                 .lineTo(E) //Ajunge la turnul de conuri
-                                /*.UNSTABLE_addTemporalMarkerOffset( () -> {
-                                   Intake.setInchis(true);
-                                   Intake.loop(this);
-                                   Lift.setLiftLevel(1);
-                               })*/
+                                /*.UNSTABLE_addTemporalMarkerOffset( 0.41,() -> {
+                                    Intake.setInchis2in1(true,this);
+                                    Lift.setLiftLevel(1);
+                                })*/
                                 .waitSeconds(0.5)
                                 .setReversed(true)
                                 .lineTo(D)
                                 /*.addDisplacementMarker(() ->{
                                     Lift.setLiftLevel(3);
                                     //Brat dat peste cap
-                                    Intake.setRotire(true);
-                                    Intake.loop(this);
-                                    Brat.input(false);
-                                    Brat.loop();
+                                    Intake.setRotire2in1(true,this);
+                                    Brat.setRotireFata(false);
                                 })*/
                                 .splineTo(C,CU)
-                                /* .UNSTABLE_addTemporalMarkerOffset(0.41, () ->{  //deschide clestele?????
-                                   Intake.setInchis(false);
-                                   Intake.loop(this);
-                               })*/
+                                /*.UNSTABLE_addTemporalMarkerOffset(0.41, () ->{  //deschide clestele?????
+                                    Intake.setInchis2in1(false,this);
+                                })*/
                                 .waitSeconds(0.5)
                                 .setReversed(false)
                                 //Incepe loop de la turn
                                 .setReversed(false)
-                                /* .addDisplacementMarker( () -> {
-                                   Intake.setInchis(true);
-                                   Intake.loop(this);
-                                   Lift.setLiftLevel(10);
-                                   //Brat dat peste cap
-                                   Intake.setRotire(false);
-                                   Intake.loop(this);
-                                   Brat.input(true);
-                                   Brat.loop();
-                               })*/
+                                /*.addDisplacementMarker( () -> {
+                                    Intake.setRotire2in1(true,this);
+                                    Lift.setLiftLevel(10);
+                                    //Brat dat peste cap
+                                    Intake.setRotire2in1(false,this);
+                                    Brat.setRotireFata(true);
+                                })*/
                                 .splineTo(D,DU)
-                                /* .addDisplacementMarker( () -> {
-                                   Intake.setInchis(false);
-                                   Intake.loop(this);
-                               })*/
+                                /*.addDisplacementMarker( () -> {
+                                    Intake.setInchis2in1(false,this);
+                                })*/
                                 .lineTo(E) //Ajunge la turnul de conuri
-                                /*.UNSTABLE_addTemporalMarkerOffset( () -> {
-                                   Intake.setInchis(true);
-                                   Intake.loop(this);
-                                   Lift.setLiftLevel(1);
-                               })*/
+                                /*.UNSTABLE_addTemporalMarkerOffset( 0.41,() -> {
+                                    Intake.setInchis2in1(true,this);
+                                    Lift.setLiftLevel(1);
+                                })*/
                                 .waitSeconds(0.5)
                                 .setReversed(true)
                                 .lineTo(D)
                                 /*.addDisplacementMarker(() ->{
                                     Lift.setLiftLevel(3);
                                     //Brat dat peste cap
-                                    Intake.setRotire(true);
-                                    Intake.loop(this);
-                                    Brat.input(false);
-                                    Brat.loop();
+                                    Intake.setRotire2in1(true,this);
+                                    Brat.setRotireFata(false);
                                 })*/
                                 .splineTo(C,CU)
-                                /* .UNSTABLE_addTemporalMarkerOffset(0.41, () ->{  //deschide clestele?????
-                                   Intake.setInchis(false);
-                                   Intake.loop(this);
-                               })*/
+                                /*.UNSTABLE_addTemporalMarkerOffset(0.41, () ->{  //deschide clestele?????
+                                    Intake.setInchis2in1(false,this);
+                                })*/
                                 .waitSeconds(0.5)
                                 .setReversed(false)
                                 //Incepe loop de la turn
                                 .setReversed(false)
-                                /* .addDisplacementMarker( () -> {
-                                   Intake.setInchis(true);
-                                   Intake.loop(this);
-                                   Lift.setLiftLevel(10);
-                                   //Brat dat peste cap
-                                   Intake.setRotire(false);
-                                   Intake.loop(this);
-                                   Brat.input(true);
-                                   Brat.loop();
-                               })*/
+                                /*.addDisplacementMarker( () -> {
+                                    Intake.setRotire2in1(true,this);
+                                    Lift.setLiftLevel(10);
+                                    //Brat dat peste cap
+                                    Intake.setRotire2in1(false,this);
+                                    Brat.setRotireFata(true);
+                                })*/
                                 .splineTo(D,DU)
-                                /* .addDisplacementMarker( () -> {
-                                   Intake.setInchis(false);
-                                   Intake.loop(this);
-                               })*/
+                                /*.addDisplacementMarker( () -> {
+                                    Intake.setInchis2in1(false,this);
+                                })*/
                                 .lineTo(E) //Ajunge la turnul de conuri
-                                /*.UNSTABLE_addTemporalMarkerOffset( () -> {
-                                   Intake.setInchis(true);
-                                   Intake.loop(this);
-                                   Lift.setLiftLevel(1);
-                               })*/
+                                /*.UNSTABLE_addTemporalMarkerOffset( 0.41,() -> {
+                                    Intake.setInchis2in1(true,this);
+                                    Lift.setLiftLevel(1);
+                                })*/
                                 .waitSeconds(0.5)
                                 .setReversed(true)
                                 .lineTo(D)
                                 /*.addDisplacementMarker(() ->{
                                     Lift.setLiftLevel(3);
                                     //Brat dat peste cap
-                                    Intake.setRotire(true);
-                                    Intake.loop(this);
-                                    Brat.input(false);
-                                    Brat.loop();
+                                    Intake.setRotire2in1(true,this);
+                                    Brat.setRotireFata(false);
                                 })*/
                                 .splineTo(C,CU)
-                                /* .UNSTABLE_addTemporalMarkerOffset(0.41, () ->{  //deschide clestele?????
-                                   Intake.setInchis(false);
-                                   Intake.loop(this);
-                               })*/
+                                /*.UNSTABLE_addTemporalMarkerOffset(0.41, () ->{  //deschide clestele?????
+                                    Intake.setInchis2in1(false,this);
+                                })*/
                                 .waitSeconds(0.5)
                                 .setReversed(false)
                                 .build());

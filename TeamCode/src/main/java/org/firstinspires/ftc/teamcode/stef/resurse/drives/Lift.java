@@ -13,9 +13,11 @@ public class Lift {
                             NIVEL_1 = 1650,
                             NIVEL_2 = 2820,
                             NIVEL_3 = 4100,
-                            NIVEL_CON1 = 642,
-                            NIVEL_CON2 = 450,
-                            NIVEL_CON3 = 258;
+                            NIVEL_CON1 = 840, //650
+                            NIVEL_CON2 = 520,
+                            NIVEL_CON3 = 390,
+                            NIVEL_CON4 = 233,
+                            NIVEL_CON5 = 50;
 
     private static float y = 0;
     private static float putere = 1;
@@ -166,6 +168,14 @@ public class Lift {
 
             case 30 :
                 target_position = NIVEL_CON3;
+                break;
+
+            case 40 :
+                target_position = NIVEL_CON4;
+                break;
+
+            case 50 :
+                target_position = NIVEL_CON5;
                 break;
         }
 
