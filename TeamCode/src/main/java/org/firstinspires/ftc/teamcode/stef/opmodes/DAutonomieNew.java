@@ -16,17 +16,18 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 @Autonomous( name = "AutonomieDreaptaNew" )
 public class DAutonomieNew extends LinearOpMode {
-    public static Pose2d A = new Pose2d(36,-60.5 , Math.toRadians(270));
+    public static Pose2d A = new Pose2d(36,-60 , Math.toRadians(270));
     public static Vector2d B = new Vector2d(36,-24 ); public  static double BU = Math.toRadians(270); // BU = Unghiul B
-    public static Vector2d C = new Vector2d(29.81,-11.6 ); public  static double CU = Math.toRadians(118);
-    public static Vector2d D = new Vector2d(48,-12.5 ); public  static double DU = Math.toRadians(0);
-    public static Vector2d E = new Vector2d(60,-13.5  ); public  static double EU = Math.toRadians(0);
+    public static Vector2d C = new Vector2d(28.81,-10.6 ); public  static double CU = Math.toRadians(116);
+    public static Vector2d CP = new Vector2d(30.91,-11.93 ); public  static double CUP = Math.toRadians(112);
+    public static Vector2d D = new Vector2d(48,-12.7 ); public  static double DU = Math.toRadians(0);
+    public static Vector2d E = new Vector2d(60,-12.7 ); public  static double EU = Math.toRadians(0);
     @Override
     public void runOpMode() throws InterruptedException {
         SHardware.init(this, true);
         Lift.init();
-        Intake.init(this);
-        Brat.init();
+        Intake.init(this, true);
+        Brat.init(true);
         TagBase.init(this);
         Intake.setInchis(true);
 
@@ -64,7 +65,7 @@ public class DAutonomieNew extends LinearOpMode {
                    Intake.setInchis2in1(false,this);
                  })
                 .splineTo(D,DU)
-                .lineTo(E) //Ajunge la turnul de conuri
+                .splineTo(E, EU) //Ajunge la turnul de conuri
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                    Intake.setInchis2in1(true,this);
 //                   Lift.setLiftLevel(1);
@@ -72,6 +73,7 @@ public class DAutonomieNew extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
 
                    Lift.setLiftLevel(1);
+                   Brat.setRotireFata(false);
                 })
                 .waitSeconds(0.5)
                 .setReversed(true)
@@ -80,13 +82,120 @@ public class DAutonomieNew extends LinearOpMode {
                     Lift.setLiftLevel(3);
                     //Brat dat peste cap
                     Intake.setRotire2in1(true,this);
-                    Brat.setRotireFata(false);
+
                 })
-                .splineTo(C,CU)
+                .splineTo(CP,CUP)
                  .UNSTABLE_addTemporalMarkerOffset(0, () ->{  //deschide clestele?????
                    Intake.setInchis2in1(false,this);
                })
                 .waitSeconds(0.5)
+                .setReversed(false)
+
+                .setReversed(false)
+                .addDisplacementMarker( () -> {
+                    Intake.setInchis2in1(true,this);
+                    Lift.setLiftLevel(20);
+                    //Brat dat peste cap
+                    Intake.setRotire2in1(false,this);
+                    Brat.setRotireFata(true);
+                    Intake.setInchis2in1(false,this);
+                })
+                .splineTo(D,DU)
+                .splineTo(E, EU) //Ajunge la turnul de conuri
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    Intake.setInchis2in1(true,this);
+//                   Lift.setLiftLevel(1);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
+
+                    Lift.setLiftLevel(1);
+                    Brat.setRotireFata(false);
+                })
+                .waitSeconds(0.5)
+                .setReversed(true)
+                .lineTo(D)
+                .addDisplacementMarker(() ->{
+                    Lift.setLiftLevel(3);
+                    //Brat dat peste cap
+                    Intake.setRotire2in1(true,this);
+
+                })
+                .splineTo(CP,CUP)
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->{  //deschide clestele?????
+                    Intake.setInchis2in1(false,this);
+                })
+                .waitSeconds(0.5)
+                .setReversed(false)
+
+                .setReversed(false)
+                .addDisplacementMarker( () -> {
+                    Intake.setInchis2in1(true,this);
+                    Lift.setLiftLevel(30);
+                    //Brat dat peste cap
+                    Intake.setRotire2in1(false,this);
+                    Brat.setRotireFata(true);
+                    Intake.setInchis2in1(false,this);
+                })
+                .splineTo(D,DU)
+                .splineTo(E, EU) //Ajunge la turnul de conuri
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    Intake.setInchis2in1(true,this);
+//                   Lift.setLiftLevel(1);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
+
+                    Lift.setLiftLevel(1);
+                    Brat.setRotireFata(false);
+                })
+                .waitSeconds(0.5)
+                .setReversed(true)
+                .lineTo(D)
+                .addDisplacementMarker(() ->{
+                    Lift.setLiftLevel(3);
+                    //Brat dat peste cap
+                    Intake.setRotire2in1(true,this);
+
+                })
+                .splineTo(CP,CUP)
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->{  //deschide clestele?????
+                    Intake.setInchis2in1(false,this);
+                })
+                .waitSeconds(0.5)
+                .setReversed(false)
+
+                .setReversed(false)
+                .addDisplacementMarker( () -> {
+                    Intake.setInchis2in1(true,this);
+                    Lift.setLiftLevel(40);
+                    //Brat dat peste cap
+                    Intake.setRotire2in1(false,this);
+                    Brat.setRotireFata(true);
+                    Intake.setInchis2in1(false,this);
+                })
+                .splineTo(D,DU)
+                .splineTo(E, EU) //Ajunge la turnul de conuri
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    Intake.setInchis2in1(true,this);
+//                   Lift.setLiftLevel(1);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
+                    Lift.setLiftLevel(1);
+                    Brat.setRotireFata(false);
+                })
+                .waitSeconds(0.5)
+                .setReversed(true)
+                .lineTo(D)
+                .addDisplacementMarker(() ->{
+                    Lift.setLiftLevel(3);
+                    //Brat dat peste cap
+                    Intake.setRotire2in1(true,this);
+
+                })
+                .splineTo(CP,CUP)
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->{  //deschide clestele?????
+                    Intake.setInchis2in1(false,this);
+                })
+//                .waitSeconds(0.5)
                 .setReversed(false)
 
                 .build();
@@ -163,6 +272,7 @@ public class DAutonomieNew extends LinearOpMode {
                     Intake.setInchis2in1(false, this);
                 })
                 .lineTo(new Vector2d(12,-16))
+                .waitSeconds(10)
                 .build();
 
 

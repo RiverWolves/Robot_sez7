@@ -11,12 +11,13 @@ public class Intake {
     public static boolean inchis;
     public static boolean rotit;
 
-    public static void init(OpMode opMode){
+    public static void init(OpMode opMode, boolean isAutonomie){
         if (!SHardware.initializat) return;
+        if(isAutonomie){
 
+        }
         inchis = false;
         rotit = false;
-
         intake1 = SHardware.intake1;
         intake2 = SHardware.intake2;
         rotire = SHardware.rotire;
@@ -45,7 +46,7 @@ public class Intake {
             rotire.setPosition(1);
         }else {
 //            rotire.setPosition(Ceva.servoToDegrees(0));
-            rotire.setPosition(0.36);
+            rotire.setPosition(0.325);
         }
 
 

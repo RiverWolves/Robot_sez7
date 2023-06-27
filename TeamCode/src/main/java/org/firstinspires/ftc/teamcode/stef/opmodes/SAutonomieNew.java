@@ -20,8 +20,8 @@ public class SAutonomieNew extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         SHardware.init(this, true);
         Lift.init();
-        Intake.init(this);
-        Brat.init();
+        Intake.init(this,true);
+        Brat.init(true);
         TagBase.init(this);
 
         Intake.setInchis(true);

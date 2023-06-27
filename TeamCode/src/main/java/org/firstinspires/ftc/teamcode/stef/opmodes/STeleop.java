@@ -23,8 +23,8 @@ public class STeleop extends LinearOpMode {
         SHardware.init(this, false);
         Giroscop.init();
         Lift.init();
-        Intake.init(this);
-        Brat.init();
+        Intake.init(this,true);
+        Brat.init(false);
 
         SGamepad.init();
 

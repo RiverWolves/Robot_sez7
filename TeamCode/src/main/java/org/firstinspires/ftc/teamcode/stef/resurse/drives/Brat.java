@@ -10,12 +10,13 @@ public class  Brat {
     private static boolean in;
     private static int target = 0;
 
-    public static void init(){
+    public static void init(boolean isAutonomie){
         if(!SHardware.initializat) return;
 
         brat = SHardware.brat;
-        brat.setTargetPosition(0);
-        brat.setPower(0.4);
+        if (isAutonomie) {
+
+        }
         brat.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
@@ -24,7 +25,7 @@ public class  Brat {
         else { brat_spate(); }
 
         brat.setTargetPosition(target);
-        brat.setPower(0.4);
+        brat.setPower(1);
         brat.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 

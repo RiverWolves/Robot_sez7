@@ -14,9 +14,9 @@ public class Lift {
                             NIVEL_2 = 2820,
                             NIVEL_3 = 4100,
                             NIVEL_CON1 = 840, //650
-                            NIVEL_CON2 = 520,
-                            NIVEL_CON3 = 390,
-                            NIVEL_CON4 = 233,
+                            NIVEL_CON2 = 662,
+                            NIVEL_CON3 = 473,
+                            NIVEL_CON4 = 283,
                             NIVEL_CON5 = 50;
 
     private static float y = 0;
