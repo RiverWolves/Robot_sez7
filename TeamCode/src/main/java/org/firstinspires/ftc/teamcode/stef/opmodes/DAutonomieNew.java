@@ -16,12 +16,12 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 @Autonomous( name = "AutonomieDreaptaNew" )
 public class DAutonomieNew extends LinearOpMode {
-    public static Pose2d A = new Pose2d(36,-60 , Math.toRadians(270));
-    public static Vector2d B = new Vector2d(36,-24 ); public  static double BU = Math.toRadians(270); // BU = Unghiul B
-    public static Vector2d C = new Vector2d(28.81,-10.6 ); public  static double CU = Math.toRadians(116);
-    public static Vector2d CP = new Vector2d(30.91,-11.93 ); public  static double CUP = Math.toRadians(112);
-    public static Vector2d D = new Vector2d(48,-12.7 ); public  static double DU = Math.toRadians(0);
-    public static Vector2d E = new Vector2d(60,-12.7 ); public  static double EU = Math.toRadians(0);
+    public static Pose2d A = new Pose2d(     36,    -60 , Math.toRadians(270));
+    public static Vector2d B = new Vector2d( 36,    -24 ); public  static double BU = Math.toRadians(105); // BU = Unghiul B
+    public static Vector2d C = new Vector2d( 29.31, -11.6 ); public  static double CU = Math.toRadians(118);
+    public static Vector2d CP = new Vector2d(30.91, -11.93 ); public  static double CUP = Math.toRadians(112);
+    public static Vector2d D = new Vector2d( 48,    -12.7 ); public  static double DU = Math.toRadians(0);
+    public static Vector2d E = new Vector2d( 61   , -12.7 ); public  static double EU = Math.toRadians(0);
     @Override
     public void runOpMode() throws InterruptedException {
         SHardware.init(this, true);
@@ -45,7 +45,7 @@ public class DAutonomieNew extends LinearOpMode {
                     Brat.setRotireFata(false);
                     Lift.setLiftLevel(3);
                 })
-                .lineTo(B)
+                .splineTo(B,BU)
                  .addDisplacementMarker( () -> {
                       Intake.setRotire2in1(true,this);
                  })

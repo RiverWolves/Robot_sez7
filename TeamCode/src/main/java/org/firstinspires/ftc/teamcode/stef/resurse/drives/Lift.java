@@ -13,11 +13,11 @@ public class Lift {
                             NIVEL_1 = 1650,
                             NIVEL_2 = 2820,
                             NIVEL_3 = 4100,
-                            NIVEL_CON1 = 840, //650
-                            NIVEL_CON2 = 662,
-                            NIVEL_CON3 = 473,
-                            NIVEL_CON4 = 283,
-                            NIVEL_CON5 = 50;
+                            NIVEL_CON1 = 941, //800
+                            NIVEL_CON2 = 772,//622
+                            NIVEL_CON3 = 641,//473
+                            NIVEL_CON4 = 517,//283
+                            NIVEL_CON5 = 334;//55
 
     private static float y = 0;
     private static float putere = 1;
