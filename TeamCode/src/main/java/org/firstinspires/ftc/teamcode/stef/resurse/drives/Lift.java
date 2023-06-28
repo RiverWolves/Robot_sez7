@@ -12,7 +12,7 @@ public class Lift {
                             NIVEL_0 = 200,
                             NIVEL_1 = 1650,
                             NIVEL_2 = 2820,
-                            NIVEL_3 = 4100,
+                            NIVEL_3 = 4050,
                             NIVEL_CON1 = 941, //800
                             NIVEL_CON2 = 772,//622
                             NIVEL_CON3 = 641,//473
