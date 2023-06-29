@@ -16,199 +16,268 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 @Autonomous( name = "Autonomie_StangaNew" )
 public class SAutonomieNew extends LinearOpMode {
+    public static Pose2d A = new Pose2d(     36,    -60 , Math.toRadians(270));
+    public static Vector2d B = new Vector2d( 36,    -24 ); public  static double BU = Math.toRadians(105); // BU = Unghiul B
+    public static Vector2d C = new Vector2d( 29.31, -11.6 ); public  static double CU = Math.toRadians(118);
+    public static Vector2d CP = new Vector2d(30.91, -11.93 ); public  static double CUP = Math.toRadians(112);
+    public static Vector2d D = new Vector2d( 48,    -12.7 ); public  static double DU = Math.toRadians(0);
+    public static Vector2d E = new Vector2d( 61   , -12.7 ); public  static double EU = Math.toRadians(0);
     @Override
     public void runOpMode() throws InterruptedException {
         SHardware.init(this, true);
         Lift.init();
-        Intake.init(this,true);
+        Intake.init(this, true);
         Brat.init(true);
         TagBase.init(this);
-
         Intake.setInchis(true);
 
         ElapsedTime et = new ElapsedTime();
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        drive.setPoseEstimate(new Pose2d(-31.22, -62.3, Math.toRadians(90)));
+        drive.setPoseEstimate(A);
 
-        TrajectorySequence TraiectorieDreapta = drive.trajectorySequenceBuilder(new Pose2d(-30.7, -61, Math.toRadians(90)))
-                //Porneste
-                .forward(2.5)
-
-
+        TrajectorySequence TraiectorieStanga = drive.trajectorySequenceBuilder(A)
+                .setReversed(true)
+                .addDisplacementMarker(()->{
+                    //Brat dat peste cap
+                    Intake.setInchis2in1(true,this);
+                    Brat.setRotireFata(false);
+                    Lift.setLiftLevel(3);
+                })
+                .splineTo(B,BU)
                 .addDisplacementMarker( () -> {
-                   Intake.setInchis(false);
-                   Intake.loop(this);
-                   Lift.setLiftLevel(3);
+                    Intake.setRotire2in1(true,this);
                 })
-
-                //Pleaca spre mijloc
-                .strafeRight(18)
-
-                 .addDisplacementMarker(()->{
-                Brat.input(true);
-                Brat.loop();
+                .splineTo(C, CU) //Ajunge la stalp
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->{  //deschide clestele?????
+                    Intake.setInchis2in1(false,this);
                 })
+                .waitSeconds(0.3)
+                //Incepe loop de la turn
+                .setReversed(false)
+                .addDisplacementMarker( () -> {
+                    Intake.setInchis2in1(true,this);
+                    Lift.setLiftLevel(10);
+                    //Brat dat peste cap
+                    Intake.setRotire2in1(false,this);
+                    Brat.setRotireFata(true);
+                    Intake.setInchis2in1(false,this);
+                })
+                .splineTo(D,DU)
+                .splineTo(E, EU) //Ajunge la turnul de conuri
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    Intake.setInchis2in1(true,this);
+//                   Lift.setLiftLevel(1);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
 
-//                 Mege la pilon
-                .lineTo(new Vector2d(-11.5, -30))
-
-                .splineTo(new Vector2d(-19, -8.8), Math.toRadians(120) )
-
-
-
-                .addTemporalMarker(() ->{
-                    Intake.setInchis(true);
-                    Intake.loop(this);
-
-                Lift.setLiftLevel(10);
+                    Lift.setLiftLevel(1);
+                    Brat.setRotireFata(false);
                 })
                 .waitSeconds(0.5)
+                .setReversed(true)
+                .lineTo(D)
+                .addDisplacementMarker(() ->{
+                    Lift.setLiftLevel(3);
+                    //Brat dat peste cap
+                    Intake.setRotire2in1(true,this);
 
-                //Se aliniaza cu turnul de conuri
-                .back(4)
-                .turn(Math.toRadians(60))
-                .splineTo(new Vector2d(-61.5, -14), Math.toRadians(180))
+                })
+                .splineTo(CP,CUP)
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->{  //deschide clestele?????
+                    Intake.setInchis2in1(false,this);
+                })
+                .waitSeconds(0.5)
+                .setReversed(false)
 
-                //Porneste spre pilon
+                .setReversed(false)
+                .addDisplacementMarker( () -> {
+                    Intake.setInchis2in1(true,this);
+                    Lift.setLiftLevel(20);
+                    //Brat dat peste cap
+                    Intake.setRotire2in1(false,this);
+                    Brat.setRotireFata(true);
+                    Intake.setInchis2in1(false,this);
+                })
+                .splineTo(D,DU)
+                .splineTo(E, EU) //Ajunge la turnul de conuri
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    Intake.setInchis2in1(true,this);
+//                   Lift.setLiftLevel(1);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
+
+                    Lift.setLiftLevel(1);
+                    Brat.setRotireFata(false);
+                })
+                .waitSeconds(0.5)
+                .setReversed(true)
+                .lineTo(D)
+                .addDisplacementMarker(() ->{
+                    Lift.setLiftLevel(3);
+                    //Brat dat peste cap
+                    Intake.setRotire2in1(true,this);
+
+                })
+                .splineTo(CP,CUP)
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->{  //deschide clestele?????
+                    Intake.setInchis2in1(false,this);
+                })
+                .waitSeconds(0.5)
+                .setReversed(false)
+
+                .setReversed(false)
+                .addDisplacementMarker( () -> {
+                    Intake.setInchis2in1(true,this);
+                    Lift.setLiftLevel(30);
+                    //Brat dat peste cap
+                    Intake.setRotire2in1(false,this);
+                    Brat.setRotireFata(true);
+                    Intake.setInchis2in1(false,this);
+                })
+                .splineTo(D,DU)
+                .splineTo(E, EU) //Ajunge la turnul de conuri
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    Intake.setInchis2in1(true,this);
+//                   Lift.setLiftLevel(1);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
+
+                    Lift.setLiftLevel(1);
+                    Brat.setRotireFata(false);
+                })
+                .waitSeconds(0.5)
+                .setReversed(true)
+                .lineTo(D)
+                .addDisplacementMarker(() ->{
+                    Lift.setLiftLevel(3);
+                    //Brat dat peste cap
+                    Intake.setRotire2in1(true,this);
+
+                })
+                .splineTo(CP,CUP)
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->{  //deschide clestele?????
+                    Intake.setInchis2in1(false,this);
+                })
+                .waitSeconds(0.5)
+                .setReversed(false)
+
+                .setReversed(false)
+                .addDisplacementMarker( () -> {
+                    Intake.setInchis2in1(true,this);
+                    Lift.setLiftLevel(40);
+                    //Brat dat peste cap
+                    Intake.setRotire2in1(false,this);
+                    Brat.setRotireFata(true);
+                    Intake.setInchis2in1(false,this);
+                })
+                .splineTo(D,DU)
+                .splineTo(E, EU) //Ajunge la turnul de conuri
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    Intake.setInchis2in1(true,this);
+//                   Lift.setLiftLevel(1);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
+                    Lift.setLiftLevel(1);
+                    Brat.setRotireFata(false);
+                })
+                .waitSeconds(0.5)
+                .setReversed(true)
+                .lineTo(D)
+                .addDisplacementMarker(() ->{
+                    Lift.setLiftLevel(3);
+                    //Brat dat peste cap
+                    Intake.setRotire2in1(true,this);
+
+                })
+                .splineTo(CP,CUP)
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->{  //deschide clestele?????
+                    Intake.setInchis2in1(false,this);
+                })
+//                .waitSeconds(0.5)
+                .setReversed(false)
+
+                .build();
+
+
+        TrajectorySequence third = drive.trajectorySequenceBuilder(TraiectorieStanga.end())
+
+                .addTemporalMarker(() ->{
+
+                    Intake.setInchis(true);
+                    Intake.loop(this);
+                })
+                .waitSeconds(1)
                 .addTemporalMarker(()->{
                     Intake.setInchis(false);
                     Intake.loop(this);
                 })
-                .waitSeconds(0.3)
-                .addTemporalMarker(() ->{
-                Lift.setLiftLevel(3);
-                })
                 .waitSeconds(0.5)
-
-                .setReversed(true)
-
-                .lineTo(new Vector2d(-47, -13))
-                .addDisplacementMarker( ()->{
-                    Intake.setRotire(false);
-                    Intake.loop(this);
-
-                    Brat.input(false);
-                    Brat.loop();
-                })
-
-                .splineTo(new Vector2d(-31.2, -11.7), Math.toRadians(60))
-                .setReversed(false)
-
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () ->{
-
-                    Intake.setInchis(true);
-                    Intake.loop(this);
-                })
-                .waitSeconds(0.5)
-                .UNSTABLE_addTemporalMarkerOffset(-0.2, () ->{
-                    Intake.setInchis(false);
-                    Intake.loop(this);
-                })
-                .waitSeconds(0.5)
-                .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
-
+                .addDisplacementMarker(() ->{
                     Intake.setRotire(true);
                     Intake.loop(this);
 
                     Brat.input(true);
                     Brat.loop();
-
-                    Lift.setLiftLevel(20);
-                })
-                .waitSeconds(1)
-
-                //Se intoarce
-                .splineTo(new Vector2d(-48, -14), Math.toRadians(180))
-                .addDisplacementMarker(() ->{
-                    Intake.setInchis(true);
-                    Intake.loop(this);
-                })
-                .splineTo(new Vector2d(-60,-14.5), Math.toRadians(180))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->{
-                    Intake.setInchis(false);
-                    Intake.loop(this);
-                })
-                .waitSeconds(1)
-                .addTemporalMarker(()->{
-                    Lift.setLiftLevel(3);
-                })
-
-                //Porneste spa puna con
-
-                //  TODO: PUNE CON
-                .waitSeconds(0.5)
-                .setReversed(true)
-                .lineTo(new Vector2d(-46.3, -13))
-                .addDisplacementMarker( ()->{
-                        Intake.setRotire(false);
-                        Intake.loop(this);
-
-                        Brat.input(false);
-                        Brat.loop();
-                })
-                .splineTo(new Vector2d(-31.3, -11.7), Math.toRadians(60))
-                .setReversed(false)
-
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () ->{
-
-                    Intake.setInchis(true);
-                    Intake.loop(this);
-                })
-                .waitSeconds(0.5)
-                .UNSTABLE_addTemporalMarkerOffset(-0.2, () ->{
-                    Intake.setInchis(false);
-                    Intake.loop(this);
-                })
-
-                .waitSeconds(0.5)
-                .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
-
-                    Intake.setRotire(true);
-                    Intake.loop(this);
-
-
 
                     Lift.setLiftLevel(0);
                 })
+                .splineTo(new Vector2d(35, -13), Math.toRadians(0))
+                .addDisplacementMarker(()->{
+                    Intake.setInchis(true);
+                    Intake.loop(this);
+                })
+                .lineTo(new Vector2d(60, -13))
+                .build();
+
+        TrajectorySequence second = drive.trajectorySequenceBuilder(TraiectorieStanga.end())
+
+                .addTemporalMarker(() ->{
+
+                    Intake.setInchis(true);
+                    Intake.loop(this);
+                })
+                .waitSeconds(1.5)
+                .addTemporalMarker(()->{
+                    Intake.setInchis(false);
+                    Intake.loop(this);
+                })
                 .waitSeconds(0.5)
-                .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
+                .addDisplacementMarker(() ->{
+                    Intake.setRotire(true);
+                    Intake.loop(this);
+
                     Brat.input(true);
                     Brat.loop();
+
+                    Lift.setLiftLevel(0);
                 })
-                .waitSeconds(1)
-                .splineTo(new Vector2d(-35, -16), Math.toRadians(180))
+                .splineTo(new Vector2d(35, -16), Math.toRadians(0))
 
-                .build();
-
-
-
-        TrajectorySequence first = drive.trajectorySequenceBuilder(TraiectorieDreapta.end())
-
-
-                .lineTo(new Vector2d(-60, -13))
-                .waitSeconds(10)
-                .build();
-
-        TrajectorySequence second = drive.trajectorySequenceBuilder(TraiectorieDreapta.end())
-
-
-                .lineTo(new Vector2d(-36, -13))
                 .waitSeconds(10)
 
                 .build();
 
-        TrajectorySequence third = drive.trajectorySequenceBuilder(TraiectorieDreapta.end())
+        TrajectorySequence first = drive.trajectorySequenceBuilder(TraiectorieStanga.end())
 
-                .lineTo(new Vector2d(-11,-13))
+                .addDisplacementMarker(()-> {
+                    Intake.setInchis2in1(true, this);
+                    Brat.setRotireFata(true);
+                    Intake.setRotire2in1(false, this);
+                    Lift.setLiftLevel(10);
+                })
+                .splineTo(new Vector2d(35, -16), Math.toRadians(0))
+                .addDisplacementMarker(()->{
+                    Intake.setInchis2in1(false, this);
+                })
+                .lineTo(new Vector2d(12,-16))
                 .waitSeconds(10)
                 .build();
 
 
         while (opModeInInit()){
             TagBase.update(this);
-
             telemetry.addData("id", TagBase.tag());
             telemetry.update();
         }
@@ -223,16 +292,16 @@ public class SAutonomieNew extends LinearOpMode {
 
 
 
-            drive.followTrajectorySequence(TraiectorieDreapta);
+            drive.followTrajectorySequence(TraiectorieStanga);
 
-           /* drive.followTrajectorySequence(principala2);*/
+            /* drive.followTrajectorySequence(principala2);*/
 
 
             switch (TagBase.tag()){
-                case 1:
+                case 2:
                     drive.followTrajectorySequence(first);
                     break;
-                case 2:
+                case 1:
                     drive.followTrajectorySequence(second);
                     break;
                 case 3:
@@ -241,8 +310,6 @@ public class SAutonomieNew extends LinearOpMode {
 
             }
 
-
-
             telemetry.addData("sec: ", et.seconds());
             telemetry.update();
         }
@@ -250,7 +317,7 @@ public class SAutonomieNew extends LinearOpMode {
 
         if(isStopRequested()) {
             TagBase.stop();
-            
+
         }
     }
 }

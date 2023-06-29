@@ -16,12 +16,12 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 @Autonomous( name = "AutonomieDreaptaNew" )
 public class DAutonomieNew extends LinearOpMode {
-    public static Pose2d A = new Pose2d(     36,    -59.5 , Math.toRadians(270));
+    public static Pose2d A = new Pose2d(     36,    -60 , Math.toRadians(270));
     public static Vector2d B = new Vector2d( 36,    -24 ); public  static double BU = Math.toRadians(105); // BU = Unghiul B
     public static Vector2d C = new Vector2d( 29.31, -11.6 ); public  static double CU = Math.toRadians(118);
-    public static Vector2d CP = new Vector2d(29.8, -12 ); public  static double CUP = Math.toRadians(110.5); //112
-    public static Vector2d D = new Vector2d( 48,    -12 ); public  static double DU = Math.toRadians(0);
-    public static Vector2d E = new Vector2d( 60.5   , -12 ); public  static double EU = Math.toRadians(0);
+    public static Vector2d CP = new Vector2d(30.91, -11.93 ); public  static double CUP = Math.toRadians(112);
+    public static Vector2d D = new Vector2d( 48,    -12.7 ); public  static double DU = Math.toRadians(0);
+    public static Vector2d E = new Vector2d( 61   , -12.7 ); public  static double EU = Math.toRadians(0);
     @Override
     public void runOpMode() throws InterruptedException {
         SHardware.init(this, true);
@@ -50,7 +50,7 @@ public class DAutonomieNew extends LinearOpMode {
                       Intake.setRotire2in1(true,this);
                  })
                 .splineTo(C, CU) //Ajunge la stalp
-                 .UNSTABLE_addTemporalMarkerOffset(0.1, () ->{  //deschide clestele?????
+                 .UNSTABLE_addTemporalMarkerOffset(0, () ->{  //deschide clestele?????
                      Intake.setInchis2in1(false,this);
                  })
                 .waitSeconds(0.3)
@@ -75,7 +75,7 @@ public class DAutonomieNew extends LinearOpMode {
                    Lift.setLiftLevel(1);
                    Brat.setRotireFata(false);
                 })
-                .waitSeconds(0.4)
+                .waitSeconds(0.5)
                 .setReversed(true)
                 .lineTo(D)
                 .addDisplacementMarker(() ->{
@@ -85,7 +85,7 @@ public class DAutonomieNew extends LinearOpMode {
 
                 })
                 .splineTo(CP,CUP)
-                 .UNSTABLE_addTemporalMarkerOffset(0.3, () ->{  //deschide clestele?????
+                 .UNSTABLE_addTemporalMarkerOffset(0, () ->{  //deschide clestele?????
                    Intake.setInchis2in1(false,this);
                })
                 .waitSeconds(0.5)
@@ -111,7 +111,7 @@ public class DAutonomieNew extends LinearOpMode {
                     Lift.setLiftLevel(1);
                     Brat.setRotireFata(false);
                 })
-                .waitSeconds(0.4)
+                .waitSeconds(0.5)
                 .setReversed(true)
                 .lineTo(D)
                 .addDisplacementMarker(() ->{
@@ -121,7 +121,7 @@ public class DAutonomieNew extends LinearOpMode {
 
                 })
                 .splineTo(CP,CUP)
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () ->{  //deschide clestele?????
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->{  //deschide clestele?????
                     Intake.setInchis2in1(false,this);
                 })
                 .waitSeconds(0.5)
@@ -147,7 +147,7 @@ public class DAutonomieNew extends LinearOpMode {
                     Lift.setLiftLevel(1);
                     Brat.setRotireFata(false);
                 })
-                .waitSeconds(0.4)
+                .waitSeconds(0.5)
                 .setReversed(true)
                 .lineTo(D)
                 .addDisplacementMarker(() ->{
@@ -157,7 +157,7 @@ public class DAutonomieNew extends LinearOpMode {
 
                 })
                 .splineTo(CP,CUP)
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () ->{  //deschide clestele?????
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->{  //deschide clestele?????
                     Intake.setInchis2in1(false,this);
                 })
                 .waitSeconds(0.5)
@@ -182,7 +182,7 @@ public class DAutonomieNew extends LinearOpMode {
                     Lift.setLiftLevel(1);
                     Brat.setRotireFata(false);
                 })
-                .waitSeconds(0.4)
+                .waitSeconds(0.5)
                 .setReversed(true)
                 .lineTo(D)
                 .addDisplacementMarker(() ->{
@@ -192,7 +192,7 @@ public class DAutonomieNew extends LinearOpMode {
 
                 })
                 .splineTo(CP,CUP)
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () ->{  //deschide clestele?????
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->{  //deschide clestele?????
                     Intake.setInchis2in1(false,this);
                 })
 //                .waitSeconds(0.5)
@@ -271,8 +271,7 @@ public class DAutonomieNew extends LinearOpMode {
                 .addDisplacementMarker(()->{
                     Intake.setInchis2in1(false, this);
                 })
-                .setReversed(true)
-                .splineTo(new Vector2d(12,-16), Math.toRadians(180))
+                .lineTo(new Vector2d(12,-16))
                 .waitSeconds(10)
                 .build();
 

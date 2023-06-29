@@ -53,7 +53,7 @@ public class AprilTagAutonomousInitDetection extends LinearOpMode
     double tagsize = 0.166;
 
     int ID_TAG_OF_INTEREST = 18; // Tag ID 18 from the 36h11 family
-    int STANGA = 0;
+        int STANGA = 0;
     int MIJLOC = 1;
     int DREAPTA = 2;
 
