@@ -73,7 +73,7 @@ public class TagBase {
         ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
 
         if (currentDetections.size() == 0){
-            tagOfInterest = 2;
+            tagOfInterest = 3;
         }
         if (currentDetections.size() != 0) {
             boolean tagFound = false;

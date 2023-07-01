@@ -76,15 +76,15 @@ public class SGamepad {
 
 
 
-//        if (Giroscop.drept) {
-//            mecanum.setWeightedDrivePower(
-//                    new Pose2d(x, y, r)
-//            );
-//        } else {
-//            mecanum.setWeightedDrivePower(
-//                    new Pose2d(-0.3*x, -0.3*y, r)
-//            );
-//        }
+        if (Giroscop.drept) {
+            mecanum.setWeightedDrivePower(
+                    new Pose2d(x, y, r)
+            );
+        } else {
+            mecanum.setWeightedDrivePower(
+                    new Pose2d(-0.3*x, -0.3*y, r)
+            );
+        }
 
 
 

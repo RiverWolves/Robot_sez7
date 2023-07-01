@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.stef.resurse.SHardware;
 
 public class  Brat {
-
+    public static float power = 1;
     private static DcMotor brat = null;
     private static boolean in;
     private static int target = 0;
@@ -25,7 +25,7 @@ public class  Brat {
         else { brat_spate(); }
 
         brat.setTargetPosition(target);
-        brat.setPower(1);
+        brat.setPower(power);
         brat.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 

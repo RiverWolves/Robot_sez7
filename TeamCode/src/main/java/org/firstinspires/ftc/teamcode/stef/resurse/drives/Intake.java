@@ -30,7 +30,7 @@ public class Intake {
         boolean einchis = inchis;
         boolean erotit = rotit;
 
-        if (einchis) {
+        if (!einchis) {
 //            intake.setPosition(Ceva.servoToDegrees(300));
             intake1.setPosition(0.1);
             intake2.setPosition(0.9);

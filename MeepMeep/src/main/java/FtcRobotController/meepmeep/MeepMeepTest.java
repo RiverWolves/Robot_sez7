@@ -9,18 +9,18 @@ import com.noahbres.meepmeep.roadrunner.trajectorysequence.TrajectorySequence;
 
 public class MeepMeepTest {
 
-    public static Pose2d A = new Pose2d(     -36,    -60 , Math.toRadians(270));
-    public static Vector2d B = new Vector2d( -36,    -24 ); public  static double BU = Math.toRadians(75); // BU = Unghiul B
-    public static Vector2d C = new Vector2d( -29.31, -11.6 ); public  static double CU = Math.toRadians(62);
-    public static Vector2d CP = new Vector2d(-30.91, -11.93 ); public  static double CUP = Math.toRadians(72);
-    public static Vector2d D = new Vector2d( -48,    -12.7 ); public  static double DU = Math.toRadians(-180);
-    public static Vector2d E = new Vector2d( -61   , -12.7 ); public  static double EU = Math.toRadians(-180);
+    public static Pose2d A = new Pose2d(     36,    -60 , Math.toRadians(270));
+    public static Vector2d B = new Vector2d( 36,    -24 ); public  static double BU = Math.toRadians(106); // BU = Unghiul B
+    public static Vector2d C = new Vector2d( 29.5, -11.8 ); public  static double CU = Math.toRadians(100);
+    public static Vector2d CP = new Vector2d(35, -8.5); public  static double CUP = Math.toRadians(130);
+    public static Vector2d D = new Vector2d( 50,    -12.7 ); public  static double DU = Math.toRadians(0);
+    public static Vector2d E = new Vector2d( 61   , -12.7 ); public  static double EU = Math.toRadians(0);
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(800);
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(40, 30, Math.toRadians(180), Math.toRadians(180), 11.99)
+                .setConstraints(45, 35, Math.toRadians(180), Math.toRadians(180), 11.99)
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(A)
                                 .setReversed(true)
