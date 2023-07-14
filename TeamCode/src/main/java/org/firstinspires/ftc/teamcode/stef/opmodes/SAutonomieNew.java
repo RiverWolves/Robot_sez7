@@ -17,16 +17,18 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 @Autonomous( name = "Autonomie_StangaNew" )
 public class SAutonomieNew extends LinearOpMode {
     public static Pose2d A = new Pose2d(     -36,    -60 , Math.toRadians(270));
-    public static Vector2d B = new Vector2d( -36,    -24 ); public  static double BU = Math.toRadians(90-(106-90)); // BU = Unghiul B
-    public static Vector2d C = new Vector2d( -29.31, -11.6 ); public  static double CU = Math.toRadians(90-(118-90));
-    public static Vector2d CP = new Vector2d(-37, -9.5); public  static double CUP = Math.toRadians(90-(146-90));
-    public static Vector2d D = new Vector2d( -50,    -12.7 ); public  static double DU = Math.toRadians(180);
+    public static Vector2d B = new Vector2d( -36,    -40 ); public  static double BU = Math.toRadians(90); // BU = Unghiul B
+    public static Vector2d C = new Vector2d( -28, -12.15 ); public  static double CU = Math.toRadians(75);
+    public static Vector2d CP = new Vector2d(-35, -9); public  static double CUP = Math.toRadians(50);
+    public static Vector2d D = new Vector2d( -54,    -12.7 ); public  static double DU = Math.toRadians(180);
     public static Vector2d E = new Vector2d( -61   , -12.7 ); public  static double EU = Math.toRadians(180);
+
 
     public TrajectorySequence get_tr_inceput(SampleMecanumDrive drive){
         return drive.trajectorySequenceBuilder(A)
                 .setReversed(true)
                 .addDisplacementMarker(()->{
+                    Brat.power = 1 ;
                     //se inchide
                     Intake.setInchis2in1(true,this);
                     //ne asiguram ca sta in pozitia aia
@@ -62,13 +64,14 @@ public class SAutonomieNew extends LinearOpMode {
                     Lift.setLiftLevel(level);
 
                 })
-                .splineTo(D,DU)
-                .addDisplacementMarker(() ->{
+                .UNSTABLE_addTemporalMarkerOffset(0.5,() ->{
                     //se roteste
                     Intake.setRotire2in1(false,this);
                     //se deschide
                     Intake.setInchis2in1(false,this);
                 })
+                .splineTo(D,DU)
+
                 .splineTo(E, EU) //Ajunge la turnul de conuri
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     //se inchide
@@ -91,19 +94,19 @@ public class SAutonomieNew extends LinearOpMode {
                     Intake.setRotire2in1(true, this);
 
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.21, () ->{
+                .UNSTABLE_addTemporalMarkerOffset(0.2, () ->{
                     //se da peste cap
                     Brat.setRotireFata(false);
                 })
                 .splineTo(CP,CUP)
 
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () ->{
+                .UNSTABLE_addTemporalMarkerOffset(0.1, () ->{
 
                     //deschide clestele
                     Intake.setInchis2in1(false,this);
                 })
 
-                .waitSeconds(0.5)
+                .waitSeconds(0.3)
                 .build();
     }
 
@@ -116,7 +119,7 @@ public class SAutonomieNew extends LinearOpMode {
                     Intake.setRotire2in1(false, this);
                     Lift.setLiftLevel(10);
                 })
-                .splineTo(D.minus(new Vector2d(15,0)),DU)
+                .splineTo(D,DU)
 
                 .lineTo(new Vector2d(pozX, D.getY()))
 
@@ -146,9 +149,9 @@ public class SAutonomieNew extends LinearOpMode {
         TrajectorySequence tr_loop3 = get_tr_loop(drive, tr_loop2.end(), 30);
         TrajectorySequence tr_loop_fin = get_tr_loop(drive, tr_loop3.end(), 40);
 
-        TrajectorySequence tr_fin_dreapta_1 = get_tr_final(drive, tr_loop_fin.end(), -60);
+        TrajectorySequence tr_fin_dreapta_1 = get_tr_final(drive, tr_loop_fin.end(), -60f);
         TrajectorySequence tr_fin_dreapta_2 = get_tr_final(drive, tr_loop_fin.end(), -36);
-        TrajectorySequence tr_fin_dreapta_3 = get_tr_final(drive, tr_loop_fin.end(), -12 );
+        TrajectorySequence tr_fin_dreapta_3 = get_tr_final(drive, tr_loop_fin.end(),-10 );
         while (opModeInInit()){
             TagBase.update(this);
             telemetry.addData("id", TagBase.tag());

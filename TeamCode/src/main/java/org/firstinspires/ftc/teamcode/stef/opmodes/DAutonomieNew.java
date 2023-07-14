@@ -17,12 +17,13 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 @Autonomous( name = "AutonomieDreaptaNew" )
 public class DAutonomieNew extends LinearOpMode {
+    /* v*/
     public static Pose2d A = new Pose2d(     36,    -60 , Math.toRadians(270));
-    public static Vector2d B = new Vector2d( 36,    -24 ); public  static double BU = Math.toRadians(106); // BU = Unghiul B
-    public static Vector2d C = new Vector2d( 29.5, -11.8 ); public  static double CU = Math.toRadians(100);
-    public static Vector2d CP = new Vector2d(35, -8.5); public  static double CUP = Math.toRadians(130);
-    public static Vector2d D = new Vector2d( 50,    -12.7 ); public  static double DU = Math.toRadians(0);
-    public static Vector2d E = new Vector2d( 61   , -12.7 ); public  static double EU = Math.toRadians(0);
+    public static Vector2d B = new Vector2d( 36,    -40 ); public  static double BU = Math.toRadians(90); // BU = Unghiul B
+    public static Vector2d C = new Vector2d( 30, -12.15 ); public  static double CU = Math.toRadians(115);
+    public static Vector2d CP = new Vector2d(36, -9); public  static double CUP = Math.toRadians(132);
+    public static Vector2d D = new Vector2d( 54,    -11.9); public  static double DU = Math.toRadians(0);
+    public static Vector2d E = new Vector2d( 61   , -11.9 ); public  static double EU = Math.toRadians(0);
 
     public TrajectorySequence get_tr_inceput(SampleMecanumDrive drive){
         return drive.trajectorySequenceBuilder(A)
@@ -151,7 +152,7 @@ public class DAutonomieNew extends LinearOpMode {
 
         TrajectorySequence tr_fin_dreapta_1 = get_tr_final(drive, tr_loop_fin.end(), 12);
         TrajectorySequence tr_fin_dreapta_2 = get_tr_final(drive, tr_loop_fin.end(), 36);
-        TrajectorySequence tr_fin_dreapta_3 = get_tr_final(drive, tr_loop_fin.end(), 60);
+        TrajectorySequence tr_fin_dreapta_3 = get_tr_final(drive, tr_loop_fin.end(), 50);
        while (opModeInInit()){
             TagBase.update(this);
             telemetry.addData("id", TagBase.tag());
