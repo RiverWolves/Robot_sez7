@@ -16,7 +16,7 @@ import org.firstinspires.ftc.teamcode.stef.resurse.tag.TagBase;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 @Disabled
-@Autonomous( name = "AutonomieDreapta" )
+@Autonomous( name = "NUD" )
 public class DAutonomie extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {

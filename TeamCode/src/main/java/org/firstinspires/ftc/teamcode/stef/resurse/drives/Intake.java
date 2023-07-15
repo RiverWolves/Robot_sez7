@@ -16,7 +16,7 @@ public class Intake {
         if(isAutonomie){
 
         }
-        inchis = false;
+        inchis = true;
         rotit = false;
         intake1 = SHardware.intake1;
         intake2 = SHardware.intake2;
@@ -30,23 +30,23 @@ public class Intake {
         boolean einchis = inchis;
         boolean erotit = rotit;
 
-        if (!einchis) {
+        if (einchis) {
 //            intake.setPosition(Ceva.servoToDegrees(300));
-            intake1.setPosition(0.1);
-            intake2.setPosition(0.9);
+            intake1.setPosition(1);
+            intake2.setPosition(0);
         }else {
 
 //            intake.setPosition(Ceva.servoToDegrees(250));
-            intake1.setPosition(0);
-            intake2.setPosition(1);
+            intake1.setPosition(0.8);
+            intake2.setPosition(0.4);
         }
 
         if (erotit) {
 //            rotire.setPosition(Ceva.servoToDegrees(180));
-            rotire.setPosition(1);
+            rotire.setPosition(0);
         }else {
 //            rotire.setPosition(Ceva.servoToDegrees(0));
-            rotire.setPosition(0.325);
+            rotire.setPosition(0.87);
         }
 
 
@@ -62,7 +62,7 @@ public class Intake {
 
     }
     public static void setInchis2in1(boolean stare , OpMode opmode){
-        inchis = !stare;
+        inchis = stare;
         loop(opmode);
     }
     public static void setRotire(boolean stare){

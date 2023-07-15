@@ -103,7 +103,7 @@ public class SAutonomieNew extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.1, () ->{
 
                     //deschide clestele
-                    Intake.setInchis2in1(false,this);
+                    Intake.setInchis2in1(true,this);
                 })
 
                 .waitSeconds(0.3)

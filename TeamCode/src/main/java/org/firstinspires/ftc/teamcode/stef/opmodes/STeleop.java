@@ -25,8 +25,6 @@ public class STeleop extends LinearOpMode {
         Lift.init();
         Intake.init(this,true);
         Brat.init(false);
-        Brat.power = 0.6f;
-
         SGamepad.init();
 
         waitForStart();
@@ -40,6 +38,7 @@ public class STeleop extends LinearOpMode {
             Giroscop.loop();
             Lift.loop(this);
             Lift.nivelLoop(this);
+            Brat.power = 0.6f;
             Brat.loop();
             Intake.loop(this);
 

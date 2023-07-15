@@ -9,16 +9,16 @@ public class Lift {
 
     public static final int LIMITARE_SUS_LIFT = 4200, //6800
                             LIMITARE_JOS_LIFT = 0,
-                            NIVEL_0 = 200,
+                            NIVEL_0 = 155,
                             NIVEL_1 = 1650,
                             NIVEL_2 = 2820,
                             NIVEL_3 = 4050,
                             NIVEL_3_2 = 3400,
-                            NIVEL_CON1 = 900, //800
-                            NIVEL_CON2 = 722,//622
-                            NIVEL_CON3 = 600,//473
-                            NIVEL_CON4 = 434,//283
-                            NIVEL_CON5 = 155;//55
+                            NIVEL_CON1 = 623, //800
+                            NIVEL_CON2 = 522,//622
+                            NIVEL_CON3 = 360,//473
+                            NIVEL_CON4 = 200,//283
+                            NIVEL_CON5 = 62;//55
 
     private static float y = 0;
     private static float putere = 1;
