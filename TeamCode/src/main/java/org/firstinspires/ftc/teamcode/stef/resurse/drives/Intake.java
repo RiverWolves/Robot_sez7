@@ -62,7 +62,7 @@ public class Intake {
 
     }
     public static void setInchis2in1(boolean stare , OpMode opmode){
-        inchis = stare;
+        inchis =    stare;
         loop(opmode);
     }
     public static void setRotire(boolean stare){

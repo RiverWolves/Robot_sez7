@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.stef.opmodes;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -14,15 +15,17 @@ import org.firstinspires.ftc.teamcode.stef.resurse.drives.Lift;
 import org.firstinspires.ftc.teamcode.stef.resurse.tag.TagBase;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous( name = "Autonomie_StangaNew" )
+@Autonomous( name = "AutonomieStangaNew" )
 public class SAutonomieNew extends LinearOpMode {
+    /* v*/
     public static Pose2d A = new Pose2d(     -36,    -60 , Math.toRadians(270));
     public static Vector2d B = new Vector2d( -36,    -40 ); public  static double BU = Math.toRadians(90); // BU = Unghiul B
-    public static Vector2d C = new Vector2d( -28, -12.15 ); public  static double CU = Math.toRadians(75);
-    public static Vector2d CP = new Vector2d(-35, -9); public  static double CUP = Math.toRadians(50);
-    public static Vector2d D = new Vector2d( -54,    -12.7 ); public  static double DU = Math.toRadians(180);
-    public static Vector2d E = new Vector2d( -61   , -12.7 ); public  static double EU = Math.toRadians(180);
+    public static Vector2d C = new Vector2d( -30, -12.15 ); public  static double CU = Math.toRadians(90 - (120 - 90));
+    public static Vector2d CP = new Vector2d(-35.5, -8.75); public  static double CUP = Math.toRadians(90 - (132 - 90));
+    public static Vector2d D = new Vector2d( -54,    -11); public  static double DU = Math.toRadians(180);
+    public static Vector2d E = new Vector2d( -60.5  , -11 ); public  static double EU = Math.toRadians(180);
 
+    public float cpdi = -1.75f, cpd = -2f;
 
     public TrajectorySequence get_tr_inceput(SampleMecanumDrive drive){
         return drive.trajectorySequenceBuilder(A)
@@ -56,6 +59,7 @@ public class SAutonomieNew extends LinearOpMode {
         return drive.trajectorySequenceBuilder(pozStart)
                 .setReversed(false)
                 .addDisplacementMarker( () -> {
+
                     //se inchide
                     Intake.setInchis2in1(true,this);
                     //se da peste cap
@@ -72,7 +76,7 @@ public class SAutonomieNew extends LinearOpMode {
                 })
                 .splineTo(D,DU)
 
-                .splineTo(E, EU) //Ajunge la turnul de conuri
+                .splineTo(new Vector2d(E.getX() + cpd,E.getY()), EU) //Ajunge la turnul de conuri
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     //se inchide
                     Intake.setInchis2in1(true,this);
@@ -103,7 +107,8 @@ public class SAutonomieNew extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.1, () ->{
 
                     //deschide clestele
-                    Intake.setInchis2in1(true,this);
+                    Intake.setInchis2in1(false,this);
+
                 })
 
                 .waitSeconds(0.3)
@@ -149,9 +154,9 @@ public class SAutonomieNew extends LinearOpMode {
         TrajectorySequence tr_loop3 = get_tr_loop(drive, tr_loop2.end(), 30);
         TrajectorySequence tr_loop_fin = get_tr_loop(drive, tr_loop3.end(), 40);
 
-        TrajectorySequence tr_fin_dreapta_1 = get_tr_final(drive, tr_loop_fin.end(), -60f);
-        TrajectorySequence tr_fin_dreapta_2 = get_tr_final(drive, tr_loop_fin.end(), -36);
-        TrajectorySequence tr_fin_dreapta_3 = get_tr_final(drive, tr_loop_fin.end(),-10 );
+        TrajectorySequence tr_fin_dreapta_1 = get_tr_final(drive, tr_loop_fin.end(),  -65);
+        TrajectorySequence tr_fin_dreapta_2 = get_tr_final(drive, tr_loop_fin.end(), -38);
+        TrajectorySequence tr_fin_dreapta_3 = get_tr_final(drive, tr_loop_fin.end(),-15 );
         while (opModeInInit()){
             TagBase.update(this);
             telemetry.addData("id", TagBase.tag());
@@ -166,9 +171,9 @@ public class SAutonomieNew extends LinearOpMode {
 
         if (opModeIsActive()){
 
-            drive.followTrajectorySequence(tr_inceput);
-            drive.followTrajectorySequence(tr_loop1);
-            drive.followTrajectorySequence(tr_loop2);
+            drive.followTrajectorySequence(tr_inceput); cpd = cpdi * 1;
+            drive.followTrajectorySequence(tr_loop1);   cpd = cpdi * 2;
+            drive.followTrajectorySequence(tr_loop2);   cpd = cpdi * 3;
             drive.followTrajectorySequence(tr_loop3);
             drive.followTrajectorySequence(tr_loop_fin);
 

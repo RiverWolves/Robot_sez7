@@ -9,12 +9,13 @@ import com.noahbres.meepmeep.roadrunner.trajectorysequence.TrajectorySequence;
 
 public class MeepMeepTest {
 
-    public static Pose2d A = new Pose2d(     36,    -60 , Math.toRadians(270));
-    public static Vector2d B = new Vector2d( 36,    -40 ); public  static double BU = Math.toRadians(90); // BU = Unghiul B
-    public static Vector2d C = new Vector2d( 29.5, -11.8 ); public  static double CU = Math.toRadians(100);
-    public static Vector2d CP = new Vector2d(35.5, -8.75); public  static double CUP = Math.toRadians(130);
-    public static Vector2d D = new Vector2d( 55,    -12.7 ); public  static double DU = Math.toRadians(0);
-    public static Vector2d E = new Vector2d( 61   , -12.7 ); public  static double EU = Math.toRadians(0);
+    public static Pose2d A = new Pose2d(     -36,    -60 , Math.toRadians(270));
+    public static Vector2d B = new Vector2d( -36,    -40 ); public  static double BU = Math.toRadians(90); // BU = Unghiul B
+    public static Vector2d C = new Vector2d( -30, -12.15 ); public  static double CU = Math.toRadians(90 - (110 - 90));
+    public static Vector2d CP = new Vector2d(-35.5, -8.75); public  static double CUP = Math.toRadians(90 - (132     - 90));
+    public static Vector2d D = new Vector2d( -54,    -11); public  static double DU = Math.toRadians(180);
+    public static Vector2d E = new Vector2d( -60  , -11 ); public  static double EU = Math.toRadians(180);
+    public static int cpe = 10; //con pusher equlizer
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(800);
 
@@ -97,7 +98,174 @@ public class MeepMeepTest {
 
                                     //deschide clestele
 //                                    Intake.setInchis2in1(false,this);
+                                    E = new Vector2d( E.getX()+ cpe  , -11 );
                                 })
+
+
+                                .waitSeconds(0.3)
+                                .setReversed(false)
+                                .addDisplacementMarker( () -> {/*
+                                    //se inchide
+                                    Intake.setInchis2in1(true,this);
+                                    //se da peste cap
+                                    Brat.setRotireFata(true);
+                                    //se coboara
+                                    Lift.setLiftLevel(level);*/
+
+                                })
+                                .UNSTABLE_addTemporalMarkerOffset(0.5,() ->{
+                              /*      //se roteste
+                                    Intake.setRotire2in1(false,this);
+                                    //se deschide
+                                    Intake.setInchis2in1(false,this);*/
+                                })
+                                .splineTo(D,DU)
+
+                                .splineTo(E, EU) //Ajunge la turnul de conuri
+                                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                                    /*//se inchide
+                                    Intake.setInchis2in1(true,this);*/
+
+                                })
+                                .UNSTABLE_addTemporalMarkerOffset(0.1, () -> {
+
+                                  /*  //se ridica
+                                    Lift.setLiftLevel(1);*/
+
+                                })
+                                .waitSeconds(0.3)
+                                .setReversed(true)
+                                .lineTo(D)
+                                .addDisplacementMarker(() ->{
+                                    /*//se ridica
+                                    Lift.setLiftLevel(4);
+                                    //se roteste
+                                    Intake.setRotire2in1(true, this);*/
+
+                                })
+                                .UNSTABLE_addTemporalMarkerOffset(0.2, () ->{
+                                    //se da peste cap
+//                                    Brat.setRotireFata(false);
+                                })
+                                .splineTo(CP,CUP)
+
+                                .UNSTABLE_addTemporalMarkerOffset(0.1, () ->{
+
+                                    //deschide clestele
+//                                    Intake.setInchis2in1(false,this);
+                                    E = new Vector2d( E.getX()+ cpe  , -11 );
+                                })
+
+
+                                .waitSeconds(0.3)
+                                .setReversed(false)
+                                .addDisplacementMarker( () -> {/*
+                                    //se inchide
+                                    Intake.setInchis2in1(true,this);
+                                    //se da peste cap
+                                    Brat.setRotireFata(true);
+                                    //se coboara
+                                    Lift.setLiftLevel(level);*/
+
+                                })
+                                .UNSTABLE_addTemporalMarkerOffset(0.5,() ->{
+                              /*      //se roteste
+                                    Intake.setRotire2in1(false,this);
+                                    //se deschide
+                                    Intake.setInchis2in1(false,this);*/
+                                })
+                                .splineTo(D,DU)
+
+                                .splineTo(E, EU) //Ajunge la turnul de conuri
+                                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                                    /*//se inchide
+                                    Intake.setInchis2in1(true,this);*/
+
+                                })
+                                .UNSTABLE_addTemporalMarkerOffset(0.1, () -> {
+
+                                  /*  //se ridica
+                                    Lift.setLiftLevel(1);*/
+
+                                })
+                                .waitSeconds(0.3)
+                                .setReversed(true)
+                                .lineTo(D)
+                                .addDisplacementMarker(() ->{
+                                    /*//se ridica
+                                    Lift.setLiftLevel(4);
+                                    //se roteste
+                                    Intake.setRotire2in1(true, this);*/
+
+                                })
+                                .UNSTABLE_addTemporalMarkerOffset(0.2, () ->{
+                                    //se da peste cap
+//                                    Brat.setRotireFata(false);
+                                })
+                                .splineTo(CP,CUP)
+
+                                .UNSTABLE_addTemporalMarkerOffset(0.1, () ->{
+
+                                    //deschide clestele
+//                                    Intake.setInchis2in1(false,this);
+                                    E = new Vector2d( E.getX()+ cpe  , -11 );
+                                })
+
+
+                                .waitSeconds(0.3)
+                                .setReversed(false)
+                                .addDisplacementMarker( () -> {/*
+                                    //se inchide
+                                    Intake.setInchis2in1(true,this);
+                                    //se da peste cap
+                                    Brat.setRotireFata(true);
+                                    //se coboara
+                                    Lift.setLiftLevel(level);*/
+
+                                })
+                                .UNSTABLE_addTemporalMarkerOffset(0.5,() ->{
+                              /*      //se roteste
+                                    Intake.setRotire2in1(false,this);
+                                    //se deschide
+                                    Intake.setInchis2in1(false,this);*/
+                                })
+                                .splineTo(D,DU)
+
+                                .splineTo(E, EU) //Ajunge la turnul de conuri
+                                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                                    /*//se inchide
+                                    Intake.setInchis2in1(true,this);*/
+
+                                })
+                                .UNSTABLE_addTemporalMarkerOffset(0.1, () -> {
+
+                                  /*  //se ridica
+                                    Lift.setLiftLevel(1);*/
+
+                                })
+                                .waitSeconds(0.3)
+                                .setReversed(true)
+                                .lineTo(D)
+                                .addDisplacementMarker(() ->{
+                                    /*//se ridica
+                                    Lift.setLiftLevel(4);
+                                    //se roteste
+                                    Intake.setRotire2in1(true, this);*/
+
+                                })
+                                .UNSTABLE_addTemporalMarkerOffset(0.2, () ->{
+                                    //se da peste cap
+//                                    Brat.setRotireFata(false);
+                                })
+                                .splineTo(CP,CUP)
+
+                                .UNSTABLE_addTemporalMarkerOffset(0.1, () ->{
+
+                                    //deschide clestele
+//                                    Intake.setInchis2in1(false,this);
+                                    E = new Vector2d( E.getX()+ cpe  , -11 );
+                                })
+
 
                                 .waitSeconds(0.3)
 
