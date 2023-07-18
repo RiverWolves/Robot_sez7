@@ -20,12 +20,10 @@ public class SAutonomieNew extends LinearOpMode {
     /* v*/
     public static Pose2d A = new Pose2d(     -36,    -60 , Math.toRadians(270));
     public static Vector2d B = new Vector2d( -36,    -40 ); public  static double BU = Math.toRadians(90); // BU = Unghiul B
-    public static Vector2d C = new Vector2d( -30, -12.15 ); public  static double CU = Math.toRadians(90 - (120 - 90));
-    public static Vector2d CP = new Vector2d(-35.5, -8.75); public  static double CUP = Math.toRadians(90 - (132 - 90));
+    public static Vector2d C = new Vector2d( -29, -12 ); public  static double CU = Math.toRadians(70);
+    public static Vector2d CP = new Vector2d(-35, -8.5); public  static double CUP = Math.toRadians(55);
     public static Vector2d D = new Vector2d( -54,    -11); public  static double DU = Math.toRadians(180);
-    public static Vector2d E = new Vector2d( -60.5  , -11 ); public  static double EU = Math.toRadians(180);
-
-    public float cpdi = -1.75f, cpd = -2f;
+    public static Vector2d E = new Vector2d( -59.825  , -11 ); public  static double EU = Math.toRadians(180);
 
     public TrajectorySequence get_tr_inceput(SampleMecanumDrive drive){
         return drive.trajectorySequenceBuilder(A)
@@ -45,17 +43,17 @@ public class SAutonomieNew extends LinearOpMode {
 
                 .splineTo(C, CU) //Ajunge la stalp
 
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () ->{  //deschide clestele?????
+                .UNSTABLE_addTemporalMarkerOffset(0.25, () ->{  //deschide clestele?????
                     //se coboara
                     Lift.setLiftLevel(4);
                     //se deschide
                     Intake.setInchis2in1(false,this);
 
                 })
-                .waitSeconds(0.5)
+                .waitSeconds(0.4)
                 .build();
     }
-    public TrajectorySequence get_tr_loop(SampleMecanumDrive drive, Pose2d pozStart, int level){
+    public TrajectorySequence get_tr_loop(SampleMecanumDrive drive, Pose2d pozStart, int level, double epozModifier){
         return drive.trajectorySequenceBuilder(pozStart)
                 .setReversed(false)
                 .addDisplacementMarker( () -> {
@@ -68,27 +66,28 @@ public class SAutonomieNew extends LinearOpMode {
                     Lift.setLiftLevel(level);
 
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.5,() ->{
+                .UNSTABLE_addTemporalMarkerOffset(0.4,() ->{
                     //se roteste
                     Intake.setRotire2in1(false,this);
                     //se deschide
                     Intake.setInchis2in1(false,this);
                 })
                 .splineTo(D,DU)
-
-                .splineTo(new Vector2d(E.getX() + cpd,E.getY()), EU) //Ajunge la turnul de conuri
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
                     //se inchide
                     Intake.setInchis2in1(true,this);
 
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.1, () -> {
+
+                .splineTo(new Vector2d(E.getX() + epozModifier, E.getY()), EU) //Ajunge la turnul de conuri
+
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
 
                     //se ridica
                     Lift.setLiftLevel(1);
 
                 })
-                .waitSeconds(0.3)
+                .waitSeconds(0.2)
                 .setReversed(true)
                 .lineTo(D)
                 .addDisplacementMarker(() ->{
@@ -108,15 +107,31 @@ public class SAutonomieNew extends LinearOpMode {
 
                     //deschide clestele
                     Intake.setInchis2in1(false,this);
-
                 })
 
-                .waitSeconds(0.3)
+                .waitSeconds(0.2)
                 .build();
     }
 
 
     public TrajectorySequence get_tr_final(SampleMecanumDrive drive, Pose2d pozStart, float pozX){
+        return drive.trajectorySequenceBuilder(pozStart)
+                    .addDisplacementMarker(()-> {
+                                 Intake.setInchis2in1(true, this);
+                                 Brat.setRotireFata(true);
+                                 Intake.setRotire2in1(false, this);
+                                 Lift.setLiftLevel(10);
+                             })
+                .turn(Math.toRadians(0)-CUP)
+                .strafeLeft(2)
+
+                .back(pozX)
+
+
+
+                .build();
+    }
+    public TrajectorySequence goBackProtocol(SampleMecanumDrive drive, Pose2d pozStart, float pozX){
         return drive.trajectorySequenceBuilder(pozStart)
                 .addDisplacementMarker(()-> {
                     Intake.setInchis2in1(true, this);
@@ -124,9 +139,12 @@ public class SAutonomieNew extends LinearOpMode {
                     Intake.setRotire2in1(false, this);
                     Lift.setLiftLevel(10);
                 })
-                .splineTo(D,DU)
+                .turn(Math.toRadians(0)-CUP)
+                .strafeLeft(2)
 
-                .lineTo(new Vector2d(pozX, D.getY()))
+                .back(pozX)
+
+
 
                 .build();
     }
@@ -149,14 +167,15 @@ public class SAutonomieNew extends LinearOpMode {
 
 
         TrajectorySequence tr_inceput = get_tr_inceput(drive);
-        TrajectorySequence tr_loop1 = get_tr_loop(drive, tr_inceput.end(), 10);
-        TrajectorySequence tr_loop2 = get_tr_loop(drive, tr_loop1.end(), 20);
-        TrajectorySequence tr_loop3 = get_tr_loop(drive, tr_loop2.end(), 30);
-        TrajectorySequence tr_loop_fin = get_tr_loop(drive, tr_loop3.end(), 40);
+        TrajectorySequence tr_loop1 = get_tr_loop(drive, tr_inceput.end(), 10, -0.5);
+        TrajectorySequence tr_loop2 = get_tr_loop(drive, tr_loop1.end(), 20,-1.5);
+        TrajectorySequence tr_loop3 = get_tr_loop(drive, tr_loop2.end(), 30,-2);
+//        TrajectorySequence tr_loop4 = get_tr_loop(drive, tr_loop3.end(), 40,1);
+        TrajectorySequence tr_loop_fin = get_tr_loop(drive, tr_loop3.end(), 40,-2.5);
 
-        TrajectorySequence tr_fin_dreapta_1 = get_tr_final(drive, tr_loop_fin.end(),  -65);
-        TrajectorySequence tr_fin_dreapta_2 = get_tr_final(drive, tr_loop_fin.end(), -38);
-        TrajectorySequence tr_fin_dreapta_3 = get_tr_final(drive, tr_loop_fin.end(),-15 );
+        TrajectorySequence tr_fin_dreapta_1 = get_tr_final(drive, tr_loop_fin.end(), -23f);
+        TrajectorySequence tr_fin_dreapta_2 = get_tr_final(drive, tr_loop_fin.end(), 1);
+        TrajectorySequence tr_fin_dreapta_3 = get_tr_final(drive, tr_loop_fin.end(), 22f);
         while (opModeInInit()){
             TagBase.update(this);
             telemetry.addData("id", TagBase.tag());
@@ -171,10 +190,11 @@ public class SAutonomieNew extends LinearOpMode {
 
         if (opModeIsActive()){
 
-            drive.followTrajectorySequence(tr_inceput); cpd = cpdi * 1;
-            drive.followTrajectorySequence(tr_loop1);   cpd = cpdi * 2;
-            drive.followTrajectorySequence(tr_loop2);   cpd = cpdi * 3;
+            drive.followTrajectorySequence(tr_inceput);
+            drive.followTrajectorySequence(tr_loop1);
+            drive.followTrajectorySequence(tr_loop2);
             drive.followTrajectorySequence(tr_loop3);
+//            drive.followTrajectorySequence(tr_loop4);
             drive.followTrajectorySequence(tr_loop_fin);
 
             switch (TagBase.tag()){

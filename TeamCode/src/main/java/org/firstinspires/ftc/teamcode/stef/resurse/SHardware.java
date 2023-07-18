@@ -4,8 +4,10 @@ package org.firstinspires.ftc.teamcode.stef.resurse;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
@@ -31,7 +33,15 @@ public class SHardware {
 
         //MOTOARE LIFT
         lift1 = (DcMotor) opMode.hardwareMap.get("lift1");
+        DcMotorEx lift1 = opMode.hardwareMap.get(DcMotorEx.class, "lift1");
+        MotorConfigurationType mconf = lift1.getMotorType().clone(); mconf.setAchieveableMaxRPMFraction(1.0);
+        lift1.setMotorType(mconf);
+
+
         lift2 = (DcMotor) opMode.hardwareMap.get("lift2");
+        DcMotorEx lift2 = opMode.hardwareMap.get(DcMotorEx.class, "lift2");
+        MotorConfigurationType mconf2 = lift2.getMotorType().clone(); mconf2.setAchieveableMaxRPMFraction(1.0);
+        lift1.setMotorType(mconf2);
 
         lift1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         lift2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

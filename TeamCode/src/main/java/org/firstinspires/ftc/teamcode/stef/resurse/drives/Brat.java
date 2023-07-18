@@ -49,4 +49,8 @@ public class  Brat {
     public static void brat_spate() {
         target = -650;
     }
+    public static void brat_init() {
+        target = 0;
+        loop();
+    }
 }
