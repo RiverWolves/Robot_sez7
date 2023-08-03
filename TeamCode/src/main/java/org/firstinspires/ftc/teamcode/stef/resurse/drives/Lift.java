@@ -9,10 +9,10 @@ public class Lift {
 
     public static final int LIMITARE_SUS_LIFT = 4200, //6800
                             LIMITARE_JOS_LIFT = 0,
-                            NIVEL_0 = 155,
+                            NIVEL_0 = 0,
                             NIVEL_1 = 1650,
                             NIVEL_2 = 2820,
-                            NIVEL_3 = 4050,
+                            NIVEL_3 = 3750,
                             NIVEL_3_2 = 3400,
                             NIVEL_CON1 = 583, //800
                             NIVEL_CON2 = 482,//622
