@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.stef.opmodes;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -15,15 +14,15 @@ import org.firstinspires.ftc.teamcode.stef.resurse.drives.Lift;
 import org.firstinspires.ftc.teamcode.stef.resurse.tag.TagBase;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous( name = "AutonomieStangaOld" )
-public class SAutonomieNew extends LinearOpMode {
+@Autonomous( name = "AutonomieDreaptaNewer" )
+public class DAutonomieNewer extends LinearOpMode {
     /* v*/
-    public static Pose2d A = new Pose2d(     -36,    -60 , Math.toRadians(270));
-    public static Vector2d B = new Vector2d( -36,    -40 ); public  static double BU = Math.toRadians(90); // BU = Unghiul B
-    public static Vector2d C = new Vector2d( -29, -12 ); public  static double CU = Math.toRadians(70);
-    public static Vector2d CP = new Vector2d(-35, -8.5); public  static double CUP = Math.toRadians(55);
-    public static Vector2d D = new Vector2d( -54,    -11); public  static double DU = Math.toRadians(180);
-    public static Vector2d E = new Vector2d( -59.825  , -11 ); public  static double EU = Math.toRadians(180);
+     public static Pose2d A = new Pose2d(     36,    -60 , Math.toRadians(270));
+    public static Vector2d B = new Vector2d( 36,    -36 ); public  static double BU = Math.toRadians(90); // BU = Unghiul B
+    public static Vector2d C = new Vector2d( 34, -10); public  static double CU = Math.toRadians(135);
+    public static Vector2d CP = new Vector2d(36, -6); public static double CUP = Math.toRadians(150);
+    public static Vector2d D = new Vector2d( 54,    -12); public  static double DU = Math.toRadians(0);
+    public static Vector2d E = new Vector2d( 61  , -12 ); public  static double EU = Math.toRadians(0);
 
     public TrajectorySequence get_tr_inceput(SampleMecanumDrive drive){
         return drive.trajectorySequenceBuilder(A)
@@ -53,7 +52,7 @@ public class SAutonomieNew extends LinearOpMode {
                 .waitSeconds(0.4)
                 .build();
     }
-    public TrajectorySequence get_tr_loop(SampleMecanumDrive drive, Pose2d pozStart, int level, double epozModifier){
+    public TrajectorySequence get_tr_loop(SampleMecanumDrive drive, Pose2d pozStart, int level){
         return drive.trajectorySequenceBuilder(pozStart)
                 .setReversed(false)
                 .addDisplacementMarker( () -> {
@@ -79,7 +78,7 @@ public class SAutonomieNew extends LinearOpMode {
 
                 })
 
-                .splineTo(new Vector2d(E.getX() + epozModifier, E.getY()), EU) //Ajunge la turnul de conuri
+                .splineTo(E, EU) //Ajunge la turnul de conuri
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
 
@@ -167,15 +166,15 @@ public class SAutonomieNew extends LinearOpMode {
 
 
         TrajectorySequence tr_inceput = get_tr_inceput(drive);
-        TrajectorySequence tr_loop1 = get_tr_loop(drive, tr_inceput.end(), 10, -0.5);
-        TrajectorySequence tr_loop2 = get_tr_loop(drive, tr_loop1.end(), 20,-1.5);
-        TrajectorySequence tr_loop3 = get_tr_loop(drive, tr_loop2.end(), 30,-2);
+        TrajectorySequence tr_loop1 = get_tr_loop(drive, tr_inceput.end(), 10);
+        TrajectorySequence tr_loop2 = get_tr_loop(drive, tr_loop1.end(), 20);
+        TrajectorySequence tr_loop3 = get_tr_loop(drive, tr_loop2.end(), 30);
 //        TrajectorySequence tr_loop4 = get_tr_loop(drive, tr_loop3.end(), 40,1);
-        TrajectorySequence tr_loop_fin = get_tr_loop(drive, tr_loop3.end(), 40,-2.5);
+        TrajectorySequence tr_loop_fin = get_tr_loop(drive, tr_loop3.end(), 40);
 
-        TrajectorySequence tr_fin_dreapta_1 = get_tr_final(drive, tr_loop_fin.end(), -23f);
-        TrajectorySequence tr_fin_dreapta_2 = get_tr_final(drive, tr_loop_fin.end(), 1);
-        TrajectorySequence tr_fin_dreapta_3 = get_tr_final(drive, tr_loop_fin.end(), 22f);
+        TrajectorySequence tr_fin_dreapta_1 = get_tr_final(drive, tr_loop_fin.end(), 23f);
+        TrajectorySequence tr_fin_dreapta_2 = get_tr_final(drive, tr_loop_fin.end(), -1);
+        TrajectorySequence tr_fin_dreapta_3 = get_tr_final(drive, tr_loop_fin.end(), -23f);
         while (opModeInInit()){
             TagBase.update(this);
             telemetry.addData("id", TagBase.tag());

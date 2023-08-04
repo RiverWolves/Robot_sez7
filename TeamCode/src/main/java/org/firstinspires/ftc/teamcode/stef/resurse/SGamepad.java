@@ -15,7 +15,9 @@ import org.firstinspires.ftc.teamcode.stef.resurse.drives.Util;
 public class SGamepad {
     private static float x, y, r, putere_lift;
     private static boolean fc_roti, buton1, buton2;
-    private static Util inchis, rotit, roti, lift;
+    private static Util inchis, rotit, roti, lift, brat;
+
+    public boolean isTestingAutonomie = true;
 
     private static SampleMecanumDrive mecanum = null;
 
@@ -30,6 +32,7 @@ public class SGamepad {
         rotit = new Util();
         roti = new Util();
         lift = new Util();
+        brat = new Util();
     }
 
     public static void loop(OpMode opMode) {
@@ -98,7 +101,10 @@ public class SGamepad {
         );
 
         //Intake + Brat
-
+        if(brat.buttonToSwich(gamepad1.dpad_left))
+        {
+            Brat.brat_init();
+        }
         //Safety mode brat
         if(Lift.getPoz() > 740){
             buton2 = rotit.buttonToSwich(gamepad2.right_bumper);
