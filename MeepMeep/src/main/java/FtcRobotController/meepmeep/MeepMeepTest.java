@@ -9,12 +9,12 @@ import com.noahbres.meepmeep.roadrunner.trajectorysequence.TrajectorySequence;
 
 public class MeepMeepTest {
 
-    public static Pose2d A = new Pose2d(     -36,    -56 , Math.toRadians(270));
-    public static Vector2d B = new Vector2d( -36,    -36 ); public  static double BU = Math.toRadians(90); // BU = Unghiul B
-    public static Vector2d C = new Vector2d( -31, -7); public  static double CU = Math.toRadians(45);
-    public static Pose2d CP = new Pose2d(-33, -4.5,Math.toRadians(30));
-    public static Vector2d D = new Vector2d( -54,    -12); public  static double DU = Math.toRadians(180);
-    public static Vector2d E = new Vector2d( -58  , -12 ); public  static double EU = Math.toRadians(180);
+    public static Pose2d A = new Pose2d(     36,    -60 , Math.toRadians(270));
+    public static Vector2d B = new Vector2d( 36,    -36 ); public  static double BU = Math.toRadians(90); // BU = Unghiul B
+    public static Vector2d C = new Vector2d( 34, -10); public  static double CU = Math.toRadians(135);
+    public static Vector2d CP = new Vector2d(36, -6); public static double CUP = Math.toRadians(150);
+    public static Vector2d D = new Vector2d( 54,    -12); public  static double DU = Math.toRadians(0);
+    public static Vector2d E = new Vector2d( 61  , -12 ); public  static double EU = Math.toRadians(0);
 
 
     public static void main(String[] args) {
@@ -96,7 +96,7 @@ public class MeepMeepTest {
                                 /*    //se da peste cap
                                     Brat.setRotireFata(false);*/
                                 })
-                                .splineTo(new Vector2d(CP.getX(),CP.getY()),CP.getHeading())
+                                .splineTo(CP,CUP)
 
                                 .UNSTABLE_addTemporalMarkerOffset(0.1, () ->{
 /*

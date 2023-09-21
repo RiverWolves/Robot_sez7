@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.stef.resurse.drives.Brat;
+import org.firstinspires.ftc.teamcode.stef.resurse.drives.Field_Centric_Drive;
 import org.firstinspires.ftc.teamcode.stef.resurse.drives.Giroscop;
 import org.firstinspires.ftc.teamcode.stef.resurse.drives.Intake;
 import org.firstinspires.ftc.teamcode.stef.resurse.drives.Lift;
@@ -39,12 +40,14 @@ public class SGamepad {
 
         mecanum = SHardware.mecanum;
 
+
         Gamepad gamepad1 = opMode.gamepad1;
         Gamepad gamepad2 = opMode.gamepad2;
            //conditie fine control roti
 
         //Roti
         fc_roti = gamepad1.left_bumper;
+        boolean resetYaw = gamepad1.right_bumper;
 
         if (Math.abs(-gamepad1.left_stick_y) > 0.1){
             x = roti.fineControl(fc_roti, -gamepad1.left_stick_y);
@@ -72,6 +75,7 @@ public class SGamepad {
         }
             r = roti.fineControl(fc_roti, -gamepad1.right_stick_x);
 
+//        Field_Centric_Drive.loop(x, y, resetYaw);
 
         mecanum.setWeightedDrivePower(
                 new Pose2d(x, y, r)

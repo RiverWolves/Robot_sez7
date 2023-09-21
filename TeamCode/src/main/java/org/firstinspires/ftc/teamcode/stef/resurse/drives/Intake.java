@@ -43,10 +43,10 @@ public class Intake {
 
         if (erotit) {
 //            rotire.setPosition(Ceva.servoToDegrees(180));
-            rotire.setPosition(0);
+            rotire.setPosition(0.27);
         }else {
 //            rotire.setPosition(Ceva.servoToDegrees(0));
-            rotire.setPosition(0.87);
+            rotire.setPosition(0.90);
         }
 
 

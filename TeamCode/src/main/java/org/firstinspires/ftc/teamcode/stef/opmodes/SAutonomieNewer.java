@@ -17,7 +17,7 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 @Autonomous( name = "AutonomieStangaNewer" )
 public class SAutonomieNewer extends LinearOpMode {
     /* v*/
-     public static Pose2d A = new Pose2d(     -36,    -60 , Math.toRadians(270));
+     public static Pose2d A = new Pose2d(     -36,    -59 , Math.toRadians(270));
     public static Vector2d B = new Vector2d( -36,    -36 ); public  static double BU = Math.toRadians(90); // BU = Unghiul B
     public static Vector2d C = new Vector2d( -34, -10); public  static double CU = Math.toRadians(45);
     public static Vector2d CP = new Vector2d(-36, -6); public static double CUP = Math.toRadians(30);

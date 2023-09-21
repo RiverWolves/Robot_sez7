@@ -17,12 +17,12 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 @Autonomous( name = "AutonomieDreaptaNewer" )
 public class DAutonomieNewer extends LinearOpMode {
     /* v*/
-     public static Pose2d A = new Pose2d(     36,    -60 , Math.toRadians(270));
+     public static Pose2d A = new Pose2d(     37,    -61 , Math.toRadians(270));
     public static Vector2d B = new Vector2d( 36,    -36 ); public  static double BU = Math.toRadians(90); // BU = Unghiul B
     public static Vector2d C = new Vector2d( 34, -10); public  static double CU = Math.toRadians(135);
     public static Vector2d CP = new Vector2d(36, -6); public static double CUP = Math.toRadians(150);
     public static Vector2d D = new Vector2d( 54,    -12); public  static double DU = Math.toRadians(0);
-    public static Vector2d E = new Vector2d( 61  , -12 ); public  static double EU = Math.toRadians(0);
+    public static Vector2d E = new Vector2d( 60  , -12 ); public  static double EU = Math.toRadians(0);
 
     public TrajectorySequence get_tr_inceput(SampleMecanumDrive drive){
         return drive.trajectorySequenceBuilder(A)
@@ -121,7 +121,7 @@ public class DAutonomieNewer extends LinearOpMode {
                                  Intake.setRotire2in1(false, this);
                                  Lift.setLiftLevel(10);
                              })
-                .turn(Math.toRadians(0)-CUP)
+                .turn(Math.toRadians(180)-CUP)
                 .strafeLeft(2)
 
                 .back(pozX)
@@ -138,7 +138,7 @@ public class DAutonomieNewer extends LinearOpMode {
                     Intake.setRotire2in1(false, this);
                     Lift.setLiftLevel(10);
                 })
-                .turn(Math.toRadians(0)-CUP)
+                .turn(Math.toRadians(180)-CUP)
                 .strafeLeft(2)
 
                 .back(pozX)
